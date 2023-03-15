@@ -4,12 +4,10 @@ import { withRouter } from '../../HOC/withRoute';
 import { WithRouterProps } from '../../HOC/withRoute';
 import './navBar.css';
 
-class NavBar extends Component {
-  handleClick() {
-    console.log('1');
-  }
-
+class NavBar extends Component<WithRouterProps> {
   render(): ReactNode {
+    const { location } = this.props;
+    const currentPage = location.pathname === '/' ? 'main' : location.pathname.slice(1);
     return (
       <>
         <ul className="header__nav">
@@ -17,7 +15,6 @@ class NavBar extends Component {
             <NavLink
               className={({ isActive }) => (isActive ? 'nav__link' + ' active-link' : 'nav__link')}
               to="/"
-              onClick={this.handleClick}
             >
               Main
             </NavLink>
@@ -26,16 +23,15 @@ class NavBar extends Component {
             <NavLink
               className={({ isActive }) => (isActive ? 'nav__link' + ' active-link' : 'nav__link')}
               to="/about"
-              onClick={this.handleClick}
             >
               About Us
             </NavLink>
           </li>
         </ul>
-        <div className="header__current">current</div>
+        <div className="header__current">Current page: {currentPage}</div>
       </>
     );
   }
 }
 
-export default NavBar;
+export default withRouter(NavBar);
