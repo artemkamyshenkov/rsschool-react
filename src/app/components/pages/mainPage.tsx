@@ -1,7 +1,13 @@
 import React, { Component, ReactNode } from 'react';
+import SearchInput from '../searchInput';
 class MainPage extends Component {
   render(): ReactNode {
-    return <h1>Main Page</h1>;
+    return (
+      <>
+        <SearchInput />
+        <h1>Main Page</h1>
+      </>
+    );
   }
 }
 
