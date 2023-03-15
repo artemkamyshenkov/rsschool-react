@@ -1,6 +1,7 @@
 * {
   margin: 0;
   padding: 0;
+  list-style: none;
 }
 body {
   font-family: 'Roboto', sans-serif;
@@ -37,4 +38,46 @@ body {
 .main {
   min-height: 100vh;
   padding: 60px 20px 0 20px;
+}
+
+.search__container {
+  display: flex;
+  justify-content: center;
+}
+
+.search__input {
+  padding: 5px 20px;
+  font-size: 18px;
+  width: 50%;
+}
+
+.search__input:focus {
+  outline: none;
+}
+
+.about__items {
+  background: #d3d3d3;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.about__item {
+  color: #fff;
+  font-size: 20px;
+}
+
+.about__link {
+  color: #fff;
+  text-decoration: none;
+}
+
+.about__link:hover {
+  color: orange;
+  transition: all 0.5s;
+}
+
+.about__items {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 }

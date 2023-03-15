@@ -1,11 +1,18 @@
 import React, { Component, ReactNode } from 'react';
-import SearchInput from '../searchInput';
+import SearchInput from '../ui/searchInput';
+import Cards from '../ui/cards/cardsList';
 class MainPage extends Component {
   render(): ReactNode {
     return (
       <>
-        <SearchInput />
-        <h1>Main Page</h1>
+        <div className="search__container">
+          {' '}
+          <SearchInput />
+        </div>
+
+        <div className="cards__container">
+          <Cards />
+        </div>
       </>
     );
   }
