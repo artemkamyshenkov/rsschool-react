@@ -1,7 +1,6 @@
 import React, { Component, ReactNode } from 'react';
 import { Outlet } from 'react-router-dom';
 import NavBar from '../components/ui/navBar/navBar';
-
 import './main.css';
 
 class MainLayout extends Component {

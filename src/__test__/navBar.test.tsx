@@ -6,7 +6,6 @@ import { MemoryRouter } from 'react-router-dom';
 
 describe('NavBar', () => {
   it('renders the navigation links and the current page', () => {
-    const location = { pathname: '/about' };
     render(
       <MemoryRouter initialEntries={['/about']}>
         <NavBar />
