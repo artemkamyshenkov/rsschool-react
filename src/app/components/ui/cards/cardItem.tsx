@@ -8,7 +8,6 @@ interface CardItemProps {
 class CardItem extends Component<CardItemProps> {
   render(): ReactNode {
     const { item } = this.props;
-    console.log(item);
     return (
       <li className="product__item">
         {<img className="item__img" src={item.images[0]} alt="Img" />}

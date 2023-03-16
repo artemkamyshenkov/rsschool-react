@@ -1,7 +1,7 @@
 import React, { Component, ReactNode } from 'react';
 import { NavLink } from 'react-router-dom';
-import { withRouter } from '../../HOC/withRoute';
-import { WithRouterProps } from '../../HOC/withRoute';
+import { withRouter } from '../../../HOC/withRoute';
+import { WithRouterProps } from '../../../HOC/withRoute';
 import './navBar.css';
 
 class NavBar extends Component<WithRouterProps> {
