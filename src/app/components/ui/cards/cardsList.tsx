@@ -8,7 +8,7 @@ interface CardsListState {
   };
 }
 
-class Cards extends Component<{}, CardsListState> {
+class Cards extends Component<object, CardsListState> {
   state: CardsListState = {
     data: { products: [] },
   };

@@ -1,33 +1,30 @@
-import React, { ChangeEvent, Component, ReactNode } from 'react';
+import React, { Component, ReactNode, ChangeEvent } from 'react';
 
-class SearchInput extends Component<{}, { inputText: string }> {
-  constructor(props: {}) {
-    super(props);
-    this.state = {
-      inputText: localStorage.getItem('searchInputValue') || '',
-    };
-    this.handleChange = this.handleChange.bind(this);
-  }
+interface InputProps {
+  value: string;
+  placeholder: string;
+  onChange: (value: string) => void;
+}
 
+class SearchInput extends Component<InputProps> {
   handleChange(event: ChangeEvent<HTMLInputElement>) {
-    this.setState({
-      inputText: event.target.value,
-    });
+    const { onChange } = this.props;
+    onChange(event.target.value);
   }
 
   handleBeforeUnload() {
-    localStorage.setItem('searchInputValue', this.state.inputText);
+    localStorage.setItem('searchInputValue', this.props.value);
   }
 
   componentDidMount() {
     this.setState({
-      inputText: this.state.inputText,
+      inputText: this.props.value,
     });
     window.addEventListener('beforeunload', () => this.handleBeforeUnload());
   }
 
   componentWillUnmount() {
-    localStorage.setItem('searchInputValue', this.state.inputText);
+    localStorage.setItem('searchInputValue', this.props.value);
     window.removeEventListener('beforeunload', () => this.handleBeforeUnload());
   }
 
@@ -36,10 +33,10 @@ class SearchInput extends Component<{}, { inputText: string }> {
       <>
         <input
           type="text"
-          value={this.state.inputText}
+          value={this.props.value}
           className="search__input"
-          onChange={this.handleChange}
-          placeholder="Search..."
+          onChange={this.handleChange.bind(this)}
+          placeholder={this.props.placeholder}
           data-testid="search-input"
         />
       </>
