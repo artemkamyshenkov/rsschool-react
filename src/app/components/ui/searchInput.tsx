@@ -40,6 +40,7 @@ class SearchInput extends Component<{}, { inputText: string }> {
           className="search__input"
           onChange={this.handleChange}
           placeholder="Search..."
+          data-testid="search-input"
         />
       </>
     );

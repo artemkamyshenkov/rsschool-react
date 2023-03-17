@@ -23,7 +23,7 @@ class Cards extends Component<{}, CardsListState> {
     const { data } = this.state;
     return (
       data && (
-        <ul className="products__list">
+        <ul className="products__list" data-testid="cards">
           {data.products.map((item) => (
             <CardItem item={item} key={item.id} />
           ))}
