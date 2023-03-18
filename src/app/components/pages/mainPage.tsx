@@ -1,11 +1,20 @@
-import React, { Component, ReactNode, ChangeEvent } from 'react';
+import React, { Component, ReactNode } from 'react';
 import SearchInput from '../ui/searchInput';
 import Cards from '../ui/cards/cardsList';
-class MainPage extends Component<object, { inputText: string }> {
+
+interface MainPageState {
+  inputText: string;
+  data: { products: [] };
+  isLoading: boolean;
+}
+
+class MainPage extends Component<object, MainPageState> {
   constructor(props: object) {
     super(props);
     this.state = {
       inputText: localStorage.getItem('searchInputValue') || '',
+      data: { products: [] },
+      isLoading: true,
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -14,7 +23,13 @@ class MainPage extends Component<object, { inputText: string }> {
     this.setState({
       inputText: value,
     });
-    console.log(value);
+  }
+
+  componentDidMount() {
+    fetch('https://dummyjson.com/products?limit=30')
+      .then((response: Response) => response.json())
+      .then((data) => this.setState({ data, isLoading: false }))
+      .catch((error) => console.error(error));
   }
 
   render(): ReactNode {
@@ -30,7 +45,7 @@ class MainPage extends Component<object, { inputText: string }> {
         </div>
 
         <div className="cards__container">
-          <Cards />
+          <Cards data={this.state.data} isLoading={this.state.isLoading} />
         </div>
       </>
     );

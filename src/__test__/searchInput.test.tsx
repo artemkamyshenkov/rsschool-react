@@ -12,6 +12,7 @@ describe('Search input', () => {
 
     expect(screen.getByPlaceholderText('Search...')).toBeInTheDocument();
   });
+
   it('onChange works', async () => {
     render(<SearchInput value="" onChange={onChange} placeholder="Search" />);
 

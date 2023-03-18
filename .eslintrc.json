@@ -22,6 +22,7 @@
     "sourceType": "module"
   },
   "plugins": ["@typescript-eslint", "react", "prettier", "react-hooks"],
+  "ignorePatterns": ["jest.setup.js", "**/vendor/*.js"],
   "rules": {
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",

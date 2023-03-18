@@ -3,32 +3,22 @@ import { ICardItem } from './interface';
 import CardItem from './cardItem';
 import './cards.css';
 interface CardsListState {
-  data: {
-    products: ICardItem[];
-  };
+  data: { products: ICardItem[] };
 }
 
-class Cards extends Component<object, CardsListState> {
-  state: CardsListState = {
-    data: { products: [] },
-  };
-  componentDidMount() {
-    fetch('https://dummyjson.com/products?limit=30')
-      .then((response) => response.json())
-      .then((data) => this.setState({ data }))
-      .catch((error) => console.error(error));
-  }
-
+class Cards extends Component<{ data: CardsListState['data']; isLoading: boolean }> {
   render(): ReactNode {
-    const { data } = this.state;
+    const { data, isLoading } = this.props;
+
     return (
-      data && (
+      <>
+        {isLoading && <div>Loading...</div>}
         <ul className="products__list" data-testid="cards">
           {data.products.map((item) => (
             <CardItem item={item} key={item.id} />
           ))}
         </ul>
-      )
+      </>
     );
   }
 }

@@ -9,7 +9,7 @@ class CardItem extends Component<CardItemProps> {
   render(): ReactNode {
     const { item } = this.props;
     return (
-      <li className="product__item">
+      <li className="product__item" data-testid="card-item">
         {<img className="item__img" src={item.images[0]} alt="Img" />}
         <p className="item__name">{item.title}</p>
         <p className="item__category">Category: {item.category}</p>
