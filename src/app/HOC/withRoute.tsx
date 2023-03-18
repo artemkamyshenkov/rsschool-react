@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom'; //These hooks are allowed to create a higher order component
 
 export interface WithRouterProps {
   location: ReturnType<typeof useLocation>;
