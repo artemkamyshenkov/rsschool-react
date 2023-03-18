@@ -6,7 +6,7 @@ import './main.css';
 class MainLayout extends Component {
   render(): ReactNode {
     return (
-      <div className="wrapper">
+      <div className="wrapper" data-testid="wrapper">
         <header className="header">
           <div className="container header__container">{<NavBar />}</div>
         </header>

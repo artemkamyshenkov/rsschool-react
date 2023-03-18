@@ -17,9 +17,6 @@ class SearchInput extends Component<InputProps> {
   }
 
   componentDidMount() {
-    this.setState({
-      inputText: this.props.value,
-    });
     window.addEventListener('beforeunload', () => this.handleBeforeUnload());
   }
 
