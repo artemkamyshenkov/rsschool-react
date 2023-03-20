@@ -14,9 +14,12 @@ class InpitDate extends Component<InputNameProps> {
 
   render(): ReactNode {
     return (
-      <div>
-        <input type="date" ref={this.date} onChange={() => this.handleChange()} />
-      </div>
+      <input
+        className="input__date"
+        type="date"
+        ref={this.date}
+        onChange={() => this.handleChange()}
+      />
     );
   }
 }

@@ -52,3 +52,7 @@
   user-select: none;
   border: none;
 }
+
+.products__list_title {
+  text-align: center;
+}

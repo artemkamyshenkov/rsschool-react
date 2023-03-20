@@ -14,9 +14,13 @@ class InpitName extends Component<InputNameProps> {
 
   render(): ReactNode {
     return (
-      <div>
-        <input type="text" ref={this.name} onChange={() => this.handleChange()} />
-      </div>
+      <input
+        className="input__form input__name"
+        placeholder="Enter product name"
+        type="text"
+        ref={this.name}
+        onChange={() => this.handleChange()}
+      />
     );
   }
 }
