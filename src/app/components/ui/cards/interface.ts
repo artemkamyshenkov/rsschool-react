@@ -7,3 +7,9 @@ export interface ICardItem {
   stock: number;
   images: string[];
 }
+
+export interface ICreatedCard {
+  title: string;
+  date: string;
+  id: number;
+}
