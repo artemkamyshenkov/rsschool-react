@@ -1,0 +1,19 @@
+.nav__link {
+  color: #fff;
+  text-decoration: none;
+}
+
+.active-link {
+  color: orange;
+  border-bottom: 1px solid orange;
+}
+
+.nav__item {
+  list-style: none;
+}
+
+.header__nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
