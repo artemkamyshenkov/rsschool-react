@@ -9,6 +9,7 @@ interface CreatedProductListState {
 class CreatedProductList extends Component<{ data: CreatedProductListState['data'] }> {
   render(): ReactNode {
     const { data } = this.props;
+
     return (
       <>
         <ul className="products__list" data-testid="cards">

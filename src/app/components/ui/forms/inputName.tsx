@@ -1,7 +1,7 @@
 import React, { Component, ReactNode, RefObject } from 'react';
 
 interface InputNameProps {
-  onNameChange: (nameValue: string) => void;
+  onChange: (name: string, value: string) => void;
 }
 
 class InpitName extends Component<InputNameProps> {
@@ -9,7 +9,7 @@ class InpitName extends Component<InputNameProps> {
 
   handleChange = () => {
     const name = this.name.current?.value === undefined ? '' : this.name.current?.value;
-    this.props.onNameChange(name);
+    this.props.onChange('productName', name);
   };
 
   render(): ReactNode {

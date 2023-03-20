@@ -1,7 +1,7 @@
 import React, { Component, ReactNode, RefObject } from 'react';
 
 interface InputNameProps {
-  onDateChange: (nameValue: string) => void;
+  onChange: (name: string, value: string) => void;
 }
 
 class InpitDate extends Component<InputNameProps> {
@@ -9,7 +9,7 @@ class InpitDate extends Component<InputNameProps> {
 
   handleChange = () => {
     const date = this.date.current?.value === undefined ? '' : this.date.current?.value;
-    this.props.onDateChange(date);
+    this.props.onChange('productDate', date);
   };
 
   render(): ReactNode {

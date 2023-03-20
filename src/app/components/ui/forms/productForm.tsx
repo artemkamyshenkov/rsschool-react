@@ -28,12 +28,12 @@ class ProductForm extends Component<object, ProductFormState> {
     this.formRef.current?.reset();
   }
 
-  handleNameChange = (name: string) => {
-    this.setState({ productName: name });
-  };
-
-  handleDateChange = (date: string) => {
-    this.setState({ productDate: date });
+  handleChange = (name: string, value: string) => {
+    console.log(name, value);
+    this.setState((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
   };
 
   render(): ReactNode {
@@ -41,8 +41,8 @@ class ProductForm extends Component<object, ProductFormState> {
       <>
         <h3>On this page you can add your product card</h3>
         <form onSubmit={this.handleSubmit.bind(this)} ref={this.formRef}>
-          <InpitName onNameChange={this.handleNameChange.bind(this)} />
-          <InpitDate onDateChange={this.handleDateChange.bind(this)} />
+          <InpitName onChange={this.handleChange.bind(this)} />
+          <InpitDate onChange={this.handleChange.bind(this)} />
           <button>Submit</button>
         </form>
         <CreatedProductList data={this.state.products} />
