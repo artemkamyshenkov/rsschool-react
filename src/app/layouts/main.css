@@ -3,6 +3,14 @@
   padding: 0;
   list-style: none;
 }
+
+input:focus {
+  outline: none;
+}
+select:focus {
+  outline: none;
+}
+
 body {
   font-family: 'Roboto', sans-serif;
 }
@@ -80,4 +88,10 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-around;
+}
+
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }

@@ -27,6 +27,14 @@ class NavBar extends Component<WithRouterProps> {
               About Us
             </NavLink>
           </li>
+          <li className="nav__item">
+            <NavLink
+              className={({ isActive }) => (isActive ? 'nav__link' + ' active-link' : 'nav__link')}
+              to="/form"
+            >
+              Form
+            </NavLink>
+          </li>
         </ul>
         <div className="header__current">Current page: {currentPage}</div>
       </>
