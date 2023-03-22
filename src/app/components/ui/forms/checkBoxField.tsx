@@ -3,8 +3,11 @@ import React, { Component, ReactNode, RefObject } from 'react';
 interface CheckBoxProps {
   onChange: (name: string, value: boolean) => void;
   error: boolean;
+  isChecked: boolean;
 }
-
+interface CheckBoxState {
+  checked: boolean;
+}
 class CheckBoxField extends Component<CheckBoxProps> {
   checkbox: RefObject<HTMLInputElement> = React.createRef();
 
@@ -23,6 +26,7 @@ class CheckBoxField extends Component<CheckBoxProps> {
           onChange={this.handleChange}
           id="checkbox-licence"
           className="input__checkbox"
+          checked={this.props.isChecked ? true : false}
         />
         <label htmlFor="checkbox-licence">
           I agree with the terms of placement and user agreement

@@ -89,11 +89,10 @@ class ProductForm extends Component<object, ProductFormState> {
       publicDays: '',
       errors: {},
     });
-
     setTimeout(() => {
       this.setState({ isSubmitted: false });
-      this.formRef.current?.reset();
     }, 1500);
+    this.formRef.current?.reset();
   }
 
   handleChange = (name: string, value: string | boolean) => {
@@ -105,6 +104,9 @@ class ProductForm extends Component<object, ProductFormState> {
 
   validateError() {
     const errors: { [key: string]: string } = {};
+    const today = new Date();
+    const date = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+    date <= new Date(this.state.productDate);
     switch (true) {
       case this.state.productName === '' || this.state.productName.length < 3:
         errors['productName'] = 'Product name must be at least 3 characters';
@@ -117,6 +119,12 @@ class ProductForm extends Component<object, ProductFormState> {
         break;
       case this.state.productDate === '':
         errors['productDate'] = 'Date is required';
+        break;
+      case this.state.productDate < '1900-01-01':
+        errors['productDate'] = 'Date сannot be lower than 1900-01-01';
+        break;
+      case date <= new Date(this.state.productDate):
+        errors['productDate'] = 'Production date must be less than today';
         break;
       case this.state.productImg === '':
         errors['productImg'] = 'Foto is required';
@@ -151,6 +159,7 @@ class ProductForm extends Component<object, ProductFormState> {
               <DropDown
                 onChange={this.handleChange.bind(this)}
                 error={this.state.errors.productCategory}
+                selectedOption={this.state.productCategory}
               />
               <InpitDate
                 onChange={this.handleChange.bind(this)}
@@ -163,10 +172,12 @@ class ProductForm extends Component<object, ProductFormState> {
               <CheckBoxField
                 onChange={this.handleChange.bind(this)}
                 error={this.state.errors.isChecked}
+                isChecked={this.state.isChecked}
               />
               <RadioField
                 onChange={this.handleChange.bind(this)}
                 error={this.state.errors.publicDays}
+                publicDays={this.state.publicDays}
               />
               <button className="item__button">Submit</button>
               {this.state.isSubmitted && <p>Form sent</p>}
