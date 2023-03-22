@@ -9,7 +9,7 @@ class CreatedProductItem extends Component<CreatedProductItemProps> {
   render(): ReactNode {
     const { item } = this.props;
     return (
-      <li className="product__item" data-testid="card-item" id={String(item.id)}>
+      <li className="product__item" id={String(item.id)}>
         {<img className="item__img" src={item.images} alt="Img" />}
         <p className="item__name">
           <span className="item__field">Name:</span> {item.title}

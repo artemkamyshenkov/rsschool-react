@@ -28,7 +28,7 @@
   width: 95%;
   padding: 5px 10px;
   border-radius: 10px;
-  border: 1px solid black;
+  border: none;
 }
 
 .input__date {
@@ -36,13 +36,14 @@
   width: 30%;
   align-self: flex-start;
   border-radius: 10px;
-  border: 1px solid black;
+  border: none;
 }
 
 .selected__field {
   padding: 5px 10px;
   width: 100%;
   border-radius: 10px;
+  border: none;
 }
 
 .input__file {

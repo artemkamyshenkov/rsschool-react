@@ -106,7 +106,6 @@ class ProductForm extends Component<object, ProductFormState> {
     const errors: { [key: string]: string } = {};
     const today = new Date();
     const date = new Date(today.getFullYear(), today.getMonth(), today.getDate());
-    date <= new Date(this.state.productDate);
     switch (true) {
       case this.state.productName === '' || this.state.productName.length < 3:
         errors['productName'] = 'Product name must be at least 3 characters';
