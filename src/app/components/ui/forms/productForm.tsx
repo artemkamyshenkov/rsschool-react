@@ -19,12 +19,11 @@ interface ProductFormState {
   publicDays: string;
   isSubmitted: boolean;
   products: ICreatedCard[];
-  errors: { [key: string]: string };
+  errors: { [key: string]: string | boolean };
 }
 
 class ProductForm extends Component<object, ProductFormState> {
   formRef: RefObject<HTMLFormElement> = React.createRef();
-
   state = {
     productName: '',
     productDate: '',
@@ -37,6 +36,12 @@ class ProductForm extends Component<object, ProductFormState> {
     isSubmitted: false,
     errors: {
       productName: '',
+      productPrice: '',
+      productCategory: '',
+      productDate: '',
+      productImg: '',
+      isChecked: false,
+      publicDays: '',
     },
   };
 
@@ -100,11 +105,30 @@ class ProductForm extends Component<object, ProductFormState> {
 
   validateError() {
     const errors: { [key: string]: string } = {};
-    if (this.state.productName === '' || this.state.productName.length < 3) {
-      errors['productName'] = 'Product name must be at least 3 characters';
-    }
-    if (this.state.productPrice <= 0) {
-      errors['productPrice'] = 'Price must be greater than 0';
+    switch (true) {
+      case this.state.productName === '' || this.state.productName.length < 3:
+        errors['productName'] = 'Product name must be at least 3 characters';
+        break;
+      case this.state.productPrice <= 0:
+        errors['productPrice'] = 'Price must be greater than 0';
+        break;
+      case this.state.productCategory === '':
+        errors['productCategory'] = 'Category selection is required';
+        break;
+      case this.state.productDate === '':
+        errors['productDate'] = 'Date is required';
+        break;
+      case this.state.productImg === '':
+        errors['productImg'] = 'Foto is required';
+        break;
+      case this.state.isChecked === false:
+        errors['isChecked'] = 'User agreement is required';
+        break;
+      case this.state.publicDays === '':
+        errors['publicDays'] = 'This field is required';
+        break;
+      default:
+        break;
     }
     return errors;
   }
@@ -118,16 +142,34 @@ class ProductForm extends Component<object, ProductFormState> {
             <div className="form__container">
               <InpitName
                 onChange={this.handleChange.bind(this)}
-                error={this.state.errors.productName ? this.state.errors.productName : ''}
+                error={this.state.errors.productName}
               />
-              <InpitNumber onChange={this.handleChange.bind(this)} />
-              <DropDown onChange={this.handleChange.bind(this)} />
-              <InpitDate onChange={this.handleChange.bind(this)} />
-              <FileUpload onChange={this.handleChange.bind(this)} />
-              <CheckBoxField onChange={this.handleChange.bind(this)} />
-              <RadioField onChange={this.handleChange.bind(this)} />
+              <InpitNumber
+                onChange={this.handleChange.bind(this)}
+                error={this.state.errors.productPrice}
+              />
+              <DropDown
+                onChange={this.handleChange.bind(this)}
+                error={this.state.errors.productCategory}
+              />
+              <InpitDate
+                onChange={this.handleChange.bind(this)}
+                error={this.state.errors.productDate}
+              />
+              <FileUpload
+                onChange={this.handleChange.bind(this)}
+                error={this.state.errors.productImg}
+              />
+              <CheckBoxField
+                onChange={this.handleChange.bind(this)}
+                error={this.state.errors.isChecked}
+              />
+              <RadioField
+                onChange={this.handleChange.bind(this)}
+                error={this.state.errors.publicDays}
+              />
               <button className="item__button">Submit</button>
-              {this.state.isSubmitted && <p>Форма отправлена</p>}
+              {this.state.isSubmitted && <p>Form sent</p>}
             </div>
           </div>
         </form>

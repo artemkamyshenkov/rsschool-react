@@ -2,6 +2,7 @@ import React, { Component, ChangeEvent } from 'react';
 
 interface InputNameProps {
   onChange: (name: string, value: string) => void;
+  error: string;
 }
 class FileUpload extends Component<InputNameProps> {
   handleFileChange = (event: ChangeEvent<HTMLInputElement>): void => {
@@ -31,6 +32,7 @@ class FileUpload extends Component<InputNameProps> {
           type="file"
           onChange={this.handleFileChange}
         />
+        {this.props.error && <p className="text__error">{this.props.error}</p>}
       </div>
     );
   }

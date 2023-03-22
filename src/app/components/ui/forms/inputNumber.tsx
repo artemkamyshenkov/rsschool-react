@@ -2,6 +2,7 @@ import React, { Component, ReactNode, RefObject } from 'react';
 
 interface InputNumberProps {
   onChange: (name: string, value: string) => void;
+  error: string;
 }
 
 class InpitNumber extends Component<InputNumberProps> {
@@ -14,13 +15,16 @@ class InpitNumber extends Component<InputNumberProps> {
 
   render(): ReactNode {
     return (
-      <input
-        placeholder="Enter product price (in euro)"
-        className="input__form input__number"
-        type="number"
-        ref={this.number}
-        onChange={this.handleChange}
-      />
+      <div className="input__container">
+        <input
+          placeholder="Enter product price (in euro)"
+          className={'input__form input__number' + (this.props.error ? ' input__error' : '')}
+          type="number"
+          ref={this.number}
+          onChange={this.handleChange}
+        />
+        {this.props.error && <p className="text__error">{this.props.error}</p>}
+      </div>
     );
   }
 }

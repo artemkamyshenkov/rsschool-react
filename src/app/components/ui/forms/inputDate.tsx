@@ -2,6 +2,7 @@ import React, { Component, ReactNode, RefObject } from 'react';
 
 interface InputNameProps {
   onChange: (name: string, value: string) => void;
+  error: string;
 }
 
 class InpitDate extends Component<InputNameProps> {
@@ -14,12 +15,15 @@ class InpitDate extends Component<InputNameProps> {
 
   render(): ReactNode {
     return (
-      <input
-        className="input__date"
-        type="date"
-        ref={this.date}
-        onChange={() => this.handleChange()}
-      />
+      <div className="input__container">
+        <input
+          className={'input__date' + (this.props.error ? ' input__error' : '')}
+          type="date"
+          ref={this.date}
+          onChange={() => this.handleChange()}
+        />
+        {this.props.error && <p className="text__error">{this.props.error}</p>}
+      </div>
     );
   }
 }

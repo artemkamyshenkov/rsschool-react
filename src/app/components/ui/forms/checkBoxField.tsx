@@ -2,6 +2,7 @@ import React, { Component, ReactNode, RefObject } from 'react';
 
 interface CheckBoxProps {
   onChange: (name: string, value: boolean) => void;
+  error: boolean;
 }
 
 class CheckBoxField extends Component<CheckBoxProps> {
@@ -26,6 +27,7 @@ class CheckBoxField extends Component<CheckBoxProps> {
         <label htmlFor="checkbox-licence">
           I agree with the terms of placement and user agreement
         </label>
+        {this.props.error && <p className="text__error">{this.props.error}</p>}
       </div>
     );
   }
