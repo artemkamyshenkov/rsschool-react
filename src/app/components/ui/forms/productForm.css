@@ -8,6 +8,13 @@
   flex-direction: column;
   align-items: center;
   gap: 20px;
+  background-color: #dcdcdc;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.input__container {
+  width: 100%;
 }
 
 .form__title {
@@ -21,22 +28,27 @@
   width: 95%;
   padding: 5px 10px;
   border-radius: 10px;
-  border: 1px solid black;
+  border: none;
 }
 
 .input__date {
   padding: 5px 10px;
   width: 30%;
   align-self: flex-start;
+  border-radius: 10px;
+  border: none;
 }
 
 .selected__field {
   padding: 5px 10px;
   width: 100%;
+  border-radius: 10px;
+  border: none;
 }
 
 .input__file {
   width: 100%;
+  margin-top: 5px;
 }
 
 .upload__file {
@@ -58,4 +70,13 @@
 }
 .input__radio {
   margin-right: 5px;
+}
+
+.input__error {
+  border: 1px solid red;
+}
+
+.text__error {
+  color: red;
+  font-size: 12px;
 }

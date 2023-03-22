@@ -2,6 +2,8 @@ import React, { Component, ReactNode, RefObject, ChangeEvent } from 'react';
 
 interface RadioFieldProps {
   onChange: (name: string, value: string) => void;
+  error: string;
+  publicDays: string;
 }
 
 class RadioField extends Component<RadioFieldProps> {
@@ -33,10 +35,12 @@ class RadioField extends Component<RadioFieldProps> {
                 value={option.value}
                 name="radio-day"
                 className="input__radio"
+                checked={this.props.publicDays === option.value}
               />
               <label htmlFor={option.name + '_' + option.value}>{option.name}</label>
             </div>
           ))}
+        {this.props.error && <p className="text__error">{this.props.error}</p>}
       </div>
     );
   }

@@ -56,3 +56,7 @@
 .products__list_title {
   text-align: center;
 }
+
+.item__field {
+  font-weight: 700;
+}

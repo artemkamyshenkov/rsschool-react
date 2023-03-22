@@ -2,6 +2,7 @@ import React, { Component, ReactNode, RefObject } from 'react';
 
 interface InputNameProps {
   onChange: (name: string, value: string) => void;
+  error: string;
 }
 
 class InpitName extends Component<InputNameProps> {
@@ -14,13 +15,16 @@ class InpitName extends Component<InputNameProps> {
 
   render(): ReactNode {
     return (
-      <input
-        className="input__form input__name"
-        placeholder="Enter product name"
-        type="text"
-        ref={this.name}
-        onChange={() => this.handleChange()}
-      />
+      <div className="input__container">
+        <input
+          className={'input__form input__name' + (this.props.error ? ' input__error' : '')}
+          placeholder="Enter product name"
+          type="text"
+          ref={this.name}
+          onChange={() => this.handleChange()}
+        />
+        {this.props.error && <p className="text__error">{this.props.error}</p>}
+      </div>
     );
   }
 }
