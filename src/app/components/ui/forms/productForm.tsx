@@ -19,6 +19,7 @@ interface ProductFormState {
   publicDays: string;
   isSubmitted: boolean;
   products: ICreatedCard[];
+  errors: { [key: string]: string };
 }
 
 class ProductForm extends Component<object, ProductFormState> {
@@ -34,6 +35,9 @@ class ProductForm extends Component<object, ProductFormState> {
     publicDays: '',
     products: [],
     isSubmitted: false,
+    errors: {
+      productName: '',
+    },
   };
 
   handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -48,6 +52,14 @@ class ProductForm extends Component<object, ProductFormState> {
       publicDays,
       products,
     } = this.state;
+
+    const errors = this.validateError();
+
+    if (Object.keys(errors).length !== 0) {
+      this.setState({ errors });
+      return;
+    }
+
     const newProduct: ICreatedCard = {
       title: productName,
       date: productDate,
@@ -58,6 +70,7 @@ class ProductForm extends Component<object, ProductFormState> {
       isChecked: isChecked,
       publicDays: publicDays,
     };
+
     const newProducts: ICreatedCard[] = [...products, newProduct];
     this.setState({
       products: newProducts,
@@ -69,6 +82,7 @@ class ProductForm extends Component<object, ProductFormState> {
       productPrice: 0,
       isChecked: false,
       publicDays: '',
+      errors: {},
     });
 
     setTimeout(() => {
@@ -84,6 +98,17 @@ class ProductForm extends Component<object, ProductFormState> {
     }));
   };
 
+  validateError() {
+    const errors: { [key: string]: string } = {};
+    if (this.state.productName === '' || this.state.productName.length < 3) {
+      errors['productName'] = 'Product name must be at least 3 characters';
+    }
+    if (this.state.productPrice <= 0) {
+      errors['productPrice'] = 'Price must be greater than 0';
+    }
+    return errors;
+  }
+
   render(): ReactNode {
     return (
       <>
@@ -91,7 +116,10 @@ class ProductForm extends Component<object, ProductFormState> {
         <form onSubmit={this.handleSubmit.bind(this)} ref={this.formRef}>
           <div className="form__content">
             <div className="form__container">
-              <InpitName onChange={this.handleChange.bind(this)} />
+              <InpitName
+                onChange={this.handleChange.bind(this)}
+                error={this.state.errors.productName ? this.state.errors.productName : ''}
+              />
               <InpitNumber onChange={this.handleChange.bind(this)} />
               <DropDown onChange={this.handleChange.bind(this)} />
               <InpitDate onChange={this.handleChange.bind(this)} />

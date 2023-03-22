@@ -12,7 +12,6 @@ class CreatedProductList extends Component<{ data: CreatedProductListState['data
 
     return (
       <>
-        {data.length > 0 ? <p className="products__list_title">Added Products</p> : ''}
         <ul className="products__list" data-testid="cards">
           {data.map((item) => (
             <CreatedProductItem item={item} key={item.id} />
