@@ -1,10 +1,10 @@
 import React, { Component, ChangeEvent } from 'react';
 
-interface InputNameProps {
+interface InputFileProps {
   onChange: (name: string, value: string) => void;
   error: string;
 }
-class FileUpload extends Component<InputNameProps> {
+class FileUpload extends Component<InputFileProps> {
   handleFileChange = (event: ChangeEvent<HTMLInputElement>): void => {
     const file: File | null = event.target.files ? event.target.files[0] : null;
     if (file) {
@@ -31,6 +31,7 @@ class FileUpload extends Component<InputNameProps> {
           id="input__file"
           type="file"
           onChange={this.handleFileChange}
+          data-testid="productImg-input"
         />
         {this.props.error && <p className="text__error">{this.props.error}</p>}
       </div>
