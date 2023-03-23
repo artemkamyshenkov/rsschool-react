@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, waitFor, fireEvent } from '@testing-library/react';
+import { render, screen, waitFor, fireEvent, getByTestId } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import ProductForm from '../app/components/ui/forms/productForm';
 import userEvent from '@testing-library/user-event';
@@ -38,6 +38,32 @@ describe('ProductForm component', () => {
 
     await waitFor(() => {
       expect(getByTestId('createdProductList')).toBeInTheDocument();
+    });
+  });
+
+  it('should display error message when input value is invalid', async () => {
+    const { getByTestId, getByText } = render(<ProductForm />);
+    const input = getByTestId('productName-input');
+    fireEvent.change(input, { target: { value: 'A' } });
+    const submitButton = getByText('Submit');
+    fireEvent.click(submitButton);
+    const errorMessage = getByText('Product name must be at least 3 characters');
+    await waitFor(() => {
+      expect(errorMessage).toBeInTheDocument();
+    });
+  });
+
+  it('should display error message when input number value is invalid', async () => {
+    const { getByTestId, getByText } = render(<ProductForm />);
+    const inputName = getByTestId('productName-input');
+    fireEvent.change(inputName, { target: { value: 'Test' } });
+    const input = getByTestId('productPrice-input');
+    fireEvent.change(input, { target: { value: '-1' } });
+    const submitButton = getByText('Submit');
+    fireEvent.click(submitButton);
+    const errorMessage = getByText('Price must be greater than 0');
+    await waitFor(() => {
+      expect(errorMessage).toBeInTheDocument();
     });
   });
 });
