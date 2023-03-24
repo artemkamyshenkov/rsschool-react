@@ -21,7 +21,7 @@ class RadioField extends Component<RadioFieldProps> {
       { name: '90 days', value: '90' },
     ];
     return (
-      <div className="publish__day">
+      <div className="publish__day" data-testid="publicDays-radio">
         <p>Choose how many days you want to publish the product?</p>
         {options &&
           options.map((option) => (

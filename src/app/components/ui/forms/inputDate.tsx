@@ -21,6 +21,7 @@ class InpitDate extends Component<InputNameProps> {
           type="date"
           ref={this.date}
           onChange={() => this.handleChange()}
+          data-testid="productDate-input"
         />
         {this.props.error && <p className="text__error">{this.props.error}</p>}
       </div>

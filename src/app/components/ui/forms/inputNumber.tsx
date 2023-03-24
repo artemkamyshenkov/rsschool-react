@@ -22,6 +22,7 @@ class InpitNumber extends Component<InputNumberProps> {
           type="number"
           ref={this.number}
           onChange={this.handleChange}
+          data-testid="productPrice-input"
         />
         {this.props.error && <p className="text__error">{this.props.error}</p>}
       </div>

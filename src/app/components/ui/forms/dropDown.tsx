@@ -23,6 +23,7 @@ class DropDown extends Component<DropDownProps> {
           ref={this.selectRef}
           value={this.props.selectedOption}
           onChange={this.handleChange}
+          data-testid="productCategory-dropdown"
         >
           <option disabled value="">
             {'Choose a category'}

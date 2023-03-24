@@ -5,9 +5,6 @@ interface CheckBoxProps {
   error: boolean;
   isChecked: boolean;
 }
-interface CheckBoxState {
-  checked: boolean;
-}
 class CheckBoxField extends Component<CheckBoxProps> {
   checkbox: RefObject<HTMLInputElement> = React.createRef();
 
@@ -27,6 +24,7 @@ class CheckBoxField extends Component<CheckBoxProps> {
           id="checkbox-licence"
           className="input__checkbox"
           checked={this.props.isChecked ? true : false}
+          data-testid="isChecked-checkbox"
         />
         <label htmlFor="checkbox-licence">
           I agree with the terms of placement and user agreement

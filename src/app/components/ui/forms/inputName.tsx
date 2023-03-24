@@ -22,6 +22,7 @@ class InpitName extends Component<InputNameProps> {
           type="text"
           ref={this.name}
           onChange={() => this.handleChange()}
+          data-testid="productName-input"
         />
         {this.props.error && <p className="text__error">{this.props.error}</p>}
       </div>

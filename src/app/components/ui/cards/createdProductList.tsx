@@ -12,7 +12,7 @@ class CreatedProductList extends Component<{ data: CreatedProductListState['data
 
     return (
       <>
-        <ul className="products__list">
+        <ul className="products__list" data-testid="createdProductList">
           {data.map((item) => (
             <CreatedProductItem item={item} key={item.id} />
           ))}
