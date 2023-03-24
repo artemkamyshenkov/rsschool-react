@@ -1,8 +1,7 @@
-import React, { ChangeEvent } from 'react';
-import { render, screen, waitFor, fireEvent } from '@testing-library/react';
+import React from 'react';
+import { render } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import FileUpload from '../app/components/ui/forms/inputFile';
-import userEvent from '@testing-library/user-event';
 
 describe('FileUpload component', () => {
   it('renders the component', () => {

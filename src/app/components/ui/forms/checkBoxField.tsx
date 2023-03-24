@@ -5,9 +5,6 @@ interface CheckBoxProps {
   error: boolean;
   isChecked: boolean;
 }
-interface CheckBoxState {
-  checked: boolean;
-}
 class CheckBoxField extends Component<CheckBoxProps> {
   checkbox: RefObject<HTMLInputElement> = React.createRef();
 

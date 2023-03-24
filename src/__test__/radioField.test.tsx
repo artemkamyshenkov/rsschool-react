@@ -1,8 +1,7 @@
 import React from 'react';
-import { render, screen, waitFor, fireEvent, queryAllByTestId } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import RadioField from '../app/components/ui/forms/radioField';
-import userEvent from '@testing-library/user-event';
 
 describe('RadioField', () => {
   const props = {
