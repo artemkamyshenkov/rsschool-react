@@ -1,6 +1,6 @@
 import React, { Component, ReactNode } from 'react';
 import { Outlet } from 'react-router-dom';
-import NavBar from '../components/ui/navBar/navBar';
+import { Header } from '../ui/molecules/header';
 import './main.css';
 
 class MainLayout extends Component {
@@ -8,7 +8,7 @@ class MainLayout extends Component {
     return (
       <div className="wrapper" data-testid="wrapper">
         <header className="header">
-          <div className="container header__container">{<NavBar />}</div>
+          <div className="container header__container">{<Header />}</div>
         </header>
         <main className="main">
           <div className="container main__container">{<Outlet />}</div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import CardItem from '../app/components/ui/cards/cardItem';
+import ItemCard from './item-card';
 
 const mockItem = {
   id: 1,
@@ -15,7 +15,7 @@ const mockItem = {
 
 describe('CardItem', () => {
   it('renders card item', () => {
-    render(<CardItem item={mockItem} />);
+    render(<ItemCard item={mockItem} />);
 
     const name = screen.getByText('Test Item');
     const category = screen.getByText('Category: Test Category');

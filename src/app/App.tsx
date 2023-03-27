@@ -1,6 +1,6 @@
 import React, { Component, ReactNode } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import MainPage from './components/pages/mainPage';
+import MainPage from './components/pages/mainPage/mainPage';
 import AboutUs from './components/pages/aboutUs';
 import ErrorPage from './components/pages/errorPage';
 import MainLayout from './layouts/main';

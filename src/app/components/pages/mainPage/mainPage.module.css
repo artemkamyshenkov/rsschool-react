@@ -1,0 +1,23 @@
+.products__list {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 2rem 0;
+  height: fit-content;
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+.search__container {
+  display: flex;
+  justify-content: center;
+}
+
+.search__input {
+  padding: 5px 20px;
+  font-size: 18px;
+  width: 50%;
+}
+
+.search__input:focus {
+  outline: none;
+}

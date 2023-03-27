@@ -1,6 +1,7 @@
 import React, { Component, ReactNode } from 'react';
-import SearchInput from '../ui/searchInput';
-import Cards from '../ui/cards/cardsList';
+import SearchInput from '../../ui/searchInput';
+import { ItemsList } from '../../../features/items';
+import styles from './mainPage.module.css';
 
 interface MainPageState {
   inputText: string;
@@ -35,7 +36,7 @@ class MainPage extends Component<object, MainPageState> {
   render(): ReactNode {
     return (
       <>
-        <div className="search__container">
+        <div className={styles.search__container}>
           {' '}
           <SearchInput
             value={this.state.inputText}
@@ -44,9 +45,11 @@ class MainPage extends Component<object, MainPageState> {
           />
         </div>
 
-        <div className="cards__container">
-          <Cards data={this.state.data} isLoading={this.state.isLoading} />
-        </div>
+        <ItemsList
+          data={this.state.data}
+          isLoading={this.state.isLoading}
+          className={styles.products__list}
+        />
       </>
     );
   }

@@ -3,7 +3,7 @@
   text-decoration: none;
 }
 
-.active-link {
+.active__link {
   color: orange;
   border-bottom: 1px solid orange;
 }

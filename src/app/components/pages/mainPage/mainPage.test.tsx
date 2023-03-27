@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, act, waitFor } from '@testing-library/react';
-import MainPage from '../app/components/pages/mainPage';
+import MainPage from './mainPage';
 import '@testing-library/jest-dom';
 import fetchMock from 'fetch-mock';
 import userEvent from '@testing-library/user-event';
