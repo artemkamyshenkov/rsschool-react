@@ -1,6 +1,6 @@
 import React, { Component, ReactNode } from 'react';
-import SearchInput from '../../ui/searchInput';
 import { ItemsList } from '../../../features/items';
+import { InputText } from '../../../ui/atoms/inputText';
 import styles from './mainPage.module.css';
 
 interface MainPageState {
@@ -37,12 +37,12 @@ class MainPage extends Component<object, MainPageState> {
     return (
       <>
         <div className={styles.search__container}>
-          {' '}
-          <SearchInput
+          <InputText className={styles.search__input} placeholder="Search" />
+          {/* <SearchInput
             value={this.state.inputText}
             onChange={this.handleChange}
             placeholder="Search"
-          />
+          /> */}
         </div>
 
         <ItemsList
