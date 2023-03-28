@@ -48,21 +48,6 @@ body {
   padding: 60px 20px 0 20px;
 }
 
-.search__container {
-  display: flex;
-  justify-content: center;
-}
-
-.search__input {
-  padding: 5px 20px;
-  font-size: 18px;
-  width: 50%;
-}
-
-.search__input:focus {
-  outline: none;
-}
-
 .about__items {
   background: #d3d3d3;
   padding: 20px;

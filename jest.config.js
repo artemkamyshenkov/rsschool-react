@@ -10,5 +10,6 @@ module.exports = {
     '<rootDir>/src/main.tsx',
     '<rootDir>/src/vite-env.d.ts',
     'interface',
+    'index',
   ],
 };

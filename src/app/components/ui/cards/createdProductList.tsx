@@ -1,7 +1,7 @@
 import React, { Component, ReactNode } from 'react';
 import { ICreatedCard } from './interface';
 import CreatedProductItem from './createdProductItem';
-import './cards.css';
+
 interface CreatedProductListState {
   data: ICreatedCard[];
 }

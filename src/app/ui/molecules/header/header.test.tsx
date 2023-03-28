@@ -1,14 +1,14 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import NavBar from '../app/components/ui/navBar/navBar';
+import { Header } from './index';
 import { MemoryRouter } from 'react-router-dom';
 
 describe('NavBar', () => {
   it('renders the navigation links and the current page', () => {
     render(
       <MemoryRouter initialEntries={['/about']}>
-        <NavBar />
+        <Header />
       </MemoryRouter>
     );
 
