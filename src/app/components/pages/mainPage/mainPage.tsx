@@ -1,58 +1,47 @@
-import React, { Component, ReactNode } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ItemsList } from '../../../features/items';
 import { InputText } from '../../../ui/atoms/inputText';
 import styles from './mainPage.module.css';
 
-interface MainPageState {
-  inputText: string;
-  data: { products: [] };
-  isLoading: boolean;
-}
+const MainPage: React.FC<object> = () => {
+  const [items, setItems] = useState([]);
+  const [inputText, setInputText] = useState<string>(
+    localStorage.getItem('searchInputValue') || ''
+  );
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
-class MainPage extends Component<object, MainPageState> {
-  constructor(props: object) {
-    super(props);
-    this.state = {
-      inputText: localStorage.getItem('searchInputValue') || '',
-      data: { products: [] },
-      isLoading: true,
-    };
-    this.handleChange = this.handleChange.bind(this);
-  }
+  const handleChange = (value: string) => {
+    setInputText(value);
+  };
 
-  handleChange(value: string) {
-    this.setState({
-      inputText: value,
-    });
-  }
+  useEffect(() => {
+    localStorage.setItem('searchInputValue', inputText);
+  }, [inputText]);
 
-  componentDidMount() {
+  useEffect(() => {
     fetch('https://dummyjson.com/products?limit=30')
       .then((response: Response) => response.json())
-      .then((data) => this.setState({ data, isLoading: false }))
-      .catch((error) => console.error(error));
-  }
+      .then((data) => {
+        setItems(data.products);
+        setIsLoading(false);
+      })
+      .catch((error) => console.log(error));
+  }, []);
 
-  render(): ReactNode {
-    return (
-      <>
-        <div className={styles.search__container}>
-          <InputText className={styles.search__input} placeholder="Search" />
-          {/* <SearchInput
-            value={this.state.inputText}
-            onChange={this.handleChange}
-            placeholder="Search"
-          /> */}
-        </div>
-
-        <ItemsList
-          data={this.state.data}
-          isLoading={this.state.isLoading}
-          className={styles.products__list}
+  return (
+    <>
+      <div className={styles.search__container}>
+        <InputText
+          className={styles.search__input}
+          placeholder="Search"
+          onChange={handleChange}
+          value={inputText}
         />
-      </>
-    );
-  }
-}
+      </div>
+
+      <ItemsList data={items} isLoading={isLoading} className={styles.products__list} />
+    </>
+  );
+};
 
 export default MainPage;

@@ -7,7 +7,7 @@ const ItemsList = ({ data, isLoading, className }: ICardsList) => {
     <>
       {isLoading && <div>Loading...</div>}
       <ul className={className} data-testid="cards">
-        {data.products.map((item) => (
+        {data.map((item) => (
           <ItemCard item={item} key={item.id} />
         ))}
       </ul>

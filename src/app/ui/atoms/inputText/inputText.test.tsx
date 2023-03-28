@@ -28,7 +28,7 @@ describe('Search input', () => {
   // });
 
   it('renders search input with placeholder', () => {
-    render(<InputText className="" placeholder="Search..." />);
+    render(<InputText className="" placeholder="Search..." onChange={() => {}} value="" />);
 
     expect(screen.getByPlaceholderText('Search...')).toBeInTheDocument();
   });
