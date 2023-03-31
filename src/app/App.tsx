@@ -1,8 +1,8 @@
 import React, { Component, ReactNode } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import MainPage from './components/pages/mainPage/mainPage';
-import AboutUs from './components/pages/aboutUs';
-import ErrorPage from './components/pages/errorPage';
+import AboutUs from './components/pages/aboutUs/aboutUs';
+import ErrorPage from './components/pages/errorPage/errorPage';
 import MainLayout from './layouts/main';
 import ProductForm from './components/ui/forms/productForm';
 class App extends Component {
