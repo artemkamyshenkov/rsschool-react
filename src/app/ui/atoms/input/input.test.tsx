@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import InputText from './inputText';
+import InputText from './input';
 import userEvent from '@testing-library/user-event';
 
 const onChange = jest.fn();

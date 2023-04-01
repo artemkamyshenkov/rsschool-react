@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { ItemsList } from '../../../features/items';
-import { InputText } from '../../../ui/atoms/inputText';
+import Input from '../../../ui/atoms/input';
 import styles from './mainPage.module.css';
 
 const MainPage: React.FC<object> = () => {
@@ -31,7 +31,7 @@ const MainPage: React.FC<object> = () => {
   return (
     <>
       <div className={styles.search__container}>
-        <InputText
+        <Input
           className={styles.search__input}
           placeholder="Search"
           onChange={handleChangeSearchInput}

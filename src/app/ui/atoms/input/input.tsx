@@ -1,11 +1,11 @@
 import React from 'react';
-import { InputProps } from './inputText.types';
+import { InputProps } from './input.types';
 
-const InputText = ({ className, placeholder, value, ...rest }: InputProps) => {
+const Input = ({ className, placeholder, value, type = 'text', ...rest }: InputProps) => {
   return (
     <>
       <input
-        type="text"
+        type={type}
         className={className}
         placeholder={placeholder}
         data-testid="search-input"
@@ -16,4 +16,4 @@ const InputText = ({ className, placeholder, value, ...rest }: InputProps) => {
   );
 };
 
-export default InputText;
+export default Input;

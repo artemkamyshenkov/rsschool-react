@@ -1,12 +1,18 @@
 import React from 'react';
-import InputWithLabel from '../../../ui/molecules/inputWithLabel';
 import styles from './createdForm.module.css';
+import Input from '../../../ui/atoms/input';
 const CreatedForm = () => {
   return (
-    <div className={styles.form__container}>
-      <h3 className="form__title">On this page you can add your product card</h3>
-      <InputWithLabel type="text" className="" placeholder="Name"></InputWithLabel>
-    </div>
+    <>
+      <h3 className={styles.form__title}>On this page you can add your product card</h3>
+      <form action="">
+        <div className={styles.form__content}>
+          <div className={styles.form__container}>
+            <Input placeholder="Name" value="" className={styles.input__form} />
+          </div>
+        </div>
+      </form>
+    </>
   );
 };
 
