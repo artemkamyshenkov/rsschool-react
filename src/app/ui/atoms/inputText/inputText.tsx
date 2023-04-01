@@ -1,10 +1,7 @@
-import React, { ChangeEvent } from 'react';
+import React from 'react';
 import { InputProps } from './inputText.types';
 
-const InputText = ({ className, placeholder, onChange, value }: InputProps) => {
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    onChange(event.target.value);
-  };
+const InputText = ({ className, placeholder, value, ...rest }: InputProps) => {
   return (
     <>
       <input
@@ -12,8 +9,8 @@ const InputText = ({ className, placeholder, onChange, value }: InputProps) => {
         className={className}
         placeholder={placeholder}
         data-testid="search-input"
-        onChange={handleChange}
         value={value}
+        {...rest}
       />
     </>
   );

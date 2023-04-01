@@ -10,10 +10,6 @@ const MainPage: React.FC<object> = () => {
   );
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  const handleChange = (value: string) => {
-    setInputText(value);
-  };
-
   useEffect(() => {
     localStorage.setItem('searchInputValue', inputText);
   }, [inputText]);
@@ -28,13 +24,17 @@ const MainPage: React.FC<object> = () => {
       .catch((error) => console.log(error));
   }, []);
 
+  const handleChangeSearchInput = (e: React.SyntheticEvent) => {
+    setInputText((e.target as HTMLInputElement).value);
+  };
+
   return (
     <>
       <div className={styles.search__container}>
         <InputText
           className={styles.search__input}
           placeholder="Search"
-          onChange={handleChange}
+          onChange={handleChangeSearchInput}
           value={inputText}
         />
       </div>
