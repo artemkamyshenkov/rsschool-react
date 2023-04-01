@@ -1,10 +1,10 @@
 import React, { Component, ReactNode } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import MainPage from './components/pages/mainPage/mainPage';
-import AboutUs from './components/pages/aboutUs';
-import ErrorPage from './components/pages/errorPage';
+import AboutUs from './components/pages/aboutUs/aboutUs';
+import ErrorPage from './components/pages/errorPage/errorPage';
 import MainLayout from './layouts/main';
-import ProductForm from './components/ui/forms/productForm';
+import CreatedForm from './components/pages/createdForm/createdForm';
 class App extends Component {
   render(): ReactNode {
     return (
@@ -13,7 +13,7 @@ class App extends Component {
           <Route path="/" element={<MainLayout />}>
             <Route index element={<MainPage />} />
             <Route path="/about" element={<AboutUs />} />
-            <Route path="/form" element={<ProductForm />} />
+            <Route path="/form" element={<CreatedForm />} />
             <Route path="/404" element={<ErrorPage />} />
             <Route path="*" element={<Navigate to="/404" replace={true} />} />
           </Route>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import AboutUs from '../app/components/pages/aboutUs';
+import AboutUs from './aboutUs';
 
 describe('NavBar', () => {
   it('renders the navigation links and the current page', () => {
