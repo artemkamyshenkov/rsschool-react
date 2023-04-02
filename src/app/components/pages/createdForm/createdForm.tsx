@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import InputWithLabel from '../../../ui/molecules/inputWithLabel';
 import CreatedProductList from '../../../features/items/organisms/createdCardList';
 import { ICreatedCard } from '../../../features/items/molecules/createdCard/createdCard.types';
+import { ICreatedForm } from './createdForm.types';
 
 const CreatedForm = () => {
   const [products, setProducts] = useState<ICreatedCard[]>([]);
@@ -13,10 +14,20 @@ const CreatedForm = () => {
     formState: { errors },
     handleSubmit,
     reset,
-  } = useForm<ICreatedCard>({ reValidateMode: 'onSubmit' });
+  } = useForm<ICreatedForm>({ reValidateMode: 'onSubmit' });
 
-  const onSubmit = (data: ICreatedCard) => {
-    setProducts([...products, data]);
+  const onSubmit = (data: ICreatedForm) => {
+    const files = data.images;
+    const file = data.images ? files![0] : null;
+    const images = file ? URL.createObjectURL(file) : '';
+    const card = {
+      id: Date.now(),
+      name: data.productName,
+      price: data.productPrice,
+      images,
+    };
+    setProducts([...products, card]);
+    console.log(card);
     reset();
   };
 
@@ -44,6 +55,16 @@ const CreatedForm = () => {
               })}
               error={errors?.productPrice?.message?.toString()}
             />
+
+            <InputWithLabel
+              type="file"
+              accept="image/jpeg,image/png,image/gif"
+              className={styles.input__form}
+              register={register('images', { required: 'Choose a file' })}
+              error={errors?.images?.message?.toString()}
+            >
+              File
+            </InputWithLabel>
 
             <Button className={styles.item__button}>Submit</Button>
           </div>

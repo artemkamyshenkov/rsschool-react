@@ -1,39 +1,39 @@
 import React from 'react';
 import { ICreatedCard } from './createdCard.types';
-
+import styles from './createdCard.module.css';
 interface CreatedProductItemProps {
   item: ICreatedCard;
 }
 
 const CreatedProductItem = ({ item }: CreatedProductItemProps) => {
   return (
-    <li className="product__item" id={String(item.id)} data-testid="created-item">
-      {<img className="item__img" src={item.images} alt="Img" />}
-      <p className="item__name">
-        <span className="item__field">Name:</span> {item.productName}
+    <li className={styles.product__item} id={String(item.id)} data-testid="created-item">
+      {<img className={styles.item__img} src={item.images} alt="Img" />}
+      <p className={styles.item__name}>
+        <span className={styles.item__field}>Name:</span> {item.name}
       </p>
-      <p className="item__name">
-        <span className="item__field">Date: </span>
+      <p className={styles.item__name}>
+        <span className={styles.item__field}>Date: </span>
         {item.date}
       </p>
-      <p className="item__name">
+      <p className={styles.item__name}>
         {' '}
-        <span className="item__field">Category: </span>
+        <span className={styles.item__field}>Category: </span>
         {item.category}
       </p>
-      <p className="item__name">
+      <p className={styles.item__name}>
         {' '}
-        <span className="item__field">Price: </span>
-        {item.productPrice}€
+        <span className={styles.item__field}>Price: </span>
+        {item.price}€
       </p>
-      <p className="item__name">
+      <p className={styles.item__name}>
         {' '}
-        <span className="item__field">Duration: </span>
+        <span className={styles.item__field}>Duration: </span>
         {item.publicDays} days
       </p>
-      <p className="item__name">
+      <p className={styles.item__name}>
         {' '}
-        <span className="item__field">Agreement: </span> yes
+        <span className={styles.item__field}>Agreement: </span> yes
       </p>
     </li>
   );

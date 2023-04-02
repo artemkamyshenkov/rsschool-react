@@ -1,10 +1,10 @@
-export interface ICreatedCard {
-  name: string;
+export interface ICreatedForm {
+  productName: string;
   date?: string;
   id: number;
-  images?: string;
+  images?: FileList;
   category?: string;
-  price: number;
+  productPrice: number;
   isChecked?: boolean;
   publicDays?: string;
 }
