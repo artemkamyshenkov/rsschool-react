@@ -1,7 +1,7 @@
-import CreatedProductList from '../app/components/ui/cards/createdProductList';
+import CreatedProductList from './createdCardList';
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { ICreatedCard } from '../app/components/ui/cards/interface';
+import { ICreatedCard } from '../../molecules/createdCard/createdCard.types';
 import '@testing-library/jest-dom';
 
 describe('Cards component', () => {
@@ -10,7 +10,7 @@ describe('Cards component', () => {
       {
         id: 1,
         images: 'https://example.com/image.png',
-        title: 'Example product',
+        name: 'Example product',
         date: '2022-01-01',
         category: 'Example category',
         price: 100,
@@ -20,7 +20,7 @@ describe('Cards component', () => {
       {
         id: 2,
         images: 'https://example.com/image.png',
-        title: 'Example product',
+        name: 'Example product',
         date: '2022-01-01',
         category: 'Example category',
         price: 100,
