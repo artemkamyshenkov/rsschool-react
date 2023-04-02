@@ -6,6 +6,7 @@ import InputWithLabel from '../../../ui/molecules/inputWithLabel';
 import CreatedProductList from '../../../features/items/organisms/createdCardList';
 import { ICreatedCard } from '../../../features/items/molecules/createdCard/createdCard.types';
 import { ICreatedForm } from './createdForm.types';
+import SelectField from '../../../ui/molecules/selectField';
 
 const CreatedForm = () => {
   const [products, setProducts] = useState<ICreatedCard[]>([]);
@@ -25,6 +26,8 @@ const CreatedForm = () => {
       name: data.productName,
       price: data.productPrice,
       images,
+      isChecked: data.isChecked,
+      category: data.select,
     };
     setProducts([...products, card]);
     console.log(card);
@@ -55,6 +58,17 @@ const CreatedForm = () => {
               })}
               error={errors?.productPrice?.message?.toString()}
             />
+            <InputWithLabel
+              type="checkbox"
+              className={styles.input__form}
+              register={register('isChecked', {
+                required: 'Field is required',
+              })}
+              error={errors?.isChecked?.message?.toString()}
+            >
+              {' '}
+              Checkbox
+            </InputWithLabel>
 
             <InputWithLabel
               type="file"
@@ -65,7 +79,11 @@ const CreatedForm = () => {
             >
               File
             </InputWithLabel>
-
+            <SelectField
+              options={['Smartphone', 'Auto', 'TV', 'Jewelry', 'Other']}
+              register={register('select', { required: 'Category is required' })}
+              error={errors?.select?.message?.toString()}
+            />
             <Button className={styles.item__button}>Submit</Button>
           </div>
         </div>

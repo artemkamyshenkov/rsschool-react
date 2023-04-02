@@ -3,7 +3,7 @@ export interface ICreatedForm {
   date?: string;
   id: number;
   images?: FileList;
-  category?: string;
+  select?: string;
   productPrice: number;
   isChecked?: boolean;
   publicDays?: string;
