@@ -1,6 +1,7 @@
 import React from 'react';
 import Label from '../../atoms/label/index';
 import InputWithLabelProps from './inputWithLabel.types';
+import styles from './inputWithLabel.module.css';
 
 const InputWithLabel = ({
   children,
@@ -8,12 +9,14 @@ const InputWithLabel = ({
   className,
   register,
   placeholder,
+  error,
   ...rest
 }: InputWithLabelProps) => {
   return (
-    <Label>
+    <Label className={styles.label}>
       {children}
-      <input type={type} className={className} {...register} placeholder={placeholder} {...rest} />
+      <input type={type} className={className} placeholder={placeholder} {...rest} {...register} />
+      {error && <p className={styles.error}>{error}</p>}
     </Label>
   );
 };

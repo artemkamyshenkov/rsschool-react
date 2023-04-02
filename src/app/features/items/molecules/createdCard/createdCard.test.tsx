@@ -1,13 +1,13 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import CreatedProductItem from '../app/components/ui/cards/createdProductItem';
+import CreatedProductItem from './createdCard';
 
 describe('CreatedProductItem component', () => {
   const mockItem = {
     id: 1,
     images: 'https://example.com/image.png',
-    title: 'Example product',
+    name: 'Example product',
     date: '2022-01-01',
     category: 'Example category',
     price: 100,

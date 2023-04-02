@@ -1,0 +1,13 @@
+.label {
+  width: 100%;
+}
+
+.radio__container {
+  display: flex;
+  align-items: center;
+}
+
+.error {
+  color: red;
+  font-size: 12px;
+}
