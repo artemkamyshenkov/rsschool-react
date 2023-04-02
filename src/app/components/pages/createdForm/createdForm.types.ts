@@ -6,5 +6,5 @@ export interface ICreatedForm {
   select?: string;
   productPrice: number;
   isChecked?: boolean;
-  publicDays?: string;
+  radio?: string;
 }

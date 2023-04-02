@@ -1,11 +1,12 @@
 import React from 'react';
 import { ISelectField } from './selectField.types';
+import styles from './selectField.module.css';
 
 const SelectField = ({ options, error, className, register, ...rest }: ISelectField) => {
   return (
-    <div className="input__container">
+    <div className={styles.input__container}>
       <select
-        className={'selected__field'}
+        className={className}
         data-testid="productCategory-dropdown"
         {...register}
         {...rest}
@@ -20,7 +21,7 @@ const SelectField = ({ options, error, className, register, ...rest }: ISelectFi
           </option>
         ))}
       </select>
-      {error && <p>{error}</p>}
+      {error && <p className={styles.error}>{error}</p>}
     </div>
   );
 };

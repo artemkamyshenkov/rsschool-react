@@ -7,7 +7,7 @@ import CreatedProductList from '../../../features/items/organisms/createdCardLis
 import { ICreatedCard } from '../../../features/items/molecules/createdCard/createdCard.types';
 import { ICreatedForm } from './createdForm.types';
 import SelectField from '../../../ui/molecules/selectField';
-
+import RadioField from '../../../ui/molecules/radioField';
 const CreatedForm = () => {
   const [products, setProducts] = useState<ICreatedCard[]>([]);
   const {
@@ -28,9 +28,10 @@ const CreatedForm = () => {
       images,
       isChecked: data.isChecked,
       category: data.select,
+      date: data.date,
+      publicDays: data.radio,
     };
     setProducts([...products, card]);
-    console.log(card);
     reset();
   };
 
@@ -58,32 +59,52 @@ const CreatedForm = () => {
               })}
               error={errors?.productPrice?.message?.toString()}
             />
-            <InputWithLabel
-              type="checkbox"
-              className={styles.input__form}
-              register={register('isChecked', {
-                required: 'Field is required',
-              })}
-              error={errors?.isChecked?.message?.toString()}
-            >
-              {' '}
-              Checkbox
-            </InputWithLabel>
-
-            <InputWithLabel
-              type="file"
-              accept="image/jpeg,image/png,image/gif"
-              className={styles.input__form}
-              register={register('images', { required: 'Choose a file' })}
-              error={errors?.images?.message?.toString()}
-            >
-              File
-            </InputWithLabel>
             <SelectField
               options={['Smartphone', 'Auto', 'TV', 'Jewelry', 'Other']}
               register={register('select', { required: 'Category is required' })}
               error={errors?.select?.message?.toString()}
+              className={styles.input__select}
             />
+            <InputWithLabel
+              type="date"
+              className={styles.input__date}
+              register={register('date', {
+                required: 'Field is required',
+              })}
+              error={errors?.date?.message?.toString()}
+            />
+
+            <InputWithLabel
+              type="file"
+              accept="image/jpeg,image/png,image/gif"
+              className={styles.input__file}
+              register={register('images', { required: 'Choose a file' })}
+              error={errors?.images?.message?.toString()}
+            >
+              Choose file
+            </InputWithLabel>
+
+            <RadioField
+              options={[
+                { name: '30 days', value: '30' },
+                { name: '60 days', value: '60' },
+                { name: '90 days', value: '90' },
+              ]}
+              register={register('radio', { required: 'Field is required' })}
+              error={errors?.radio?.message?.toString()}
+              className={styles.input__radio}
+            />
+            <InputWithLabel
+              type="checkbox"
+              register={register('isChecked', {
+                required: 'Field is required',
+              })}
+              error={errors?.isChecked?.message?.toString()}
+              className={styles.input__agree}
+            >
+              {' '}
+              I agree with the posting rules
+            </InputWithLabel>
             <Button className={styles.item__button}>Submit</Button>
           </div>
         </div>
