@@ -1,26 +1,23 @@
 import React, { useState } from 'react';
 import styles from './createdForm.module.css';
-import Input from '../../../ui/atoms/input';
 import { Button } from '../../../ui/atoms/button';
-import { useForm, SubmitHandler, FieldValues } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
+import InputWithLabel from '../../../ui/molecules/inputWithLabel';
+import CreatedProductList from '../../../features/items/organisms/createdCardList';
+import { ICreatedCard } from '../../../features/items/molecules/createdCard/createdCard.types';
+
 const CreatedForm = () => {
-  const [data, setData] = useState({ name: '', price: '' });
+  const [products, setProducts] = useState<ICreatedCard[]>([]);
   const {
     register,
     formState: { errors },
     handleSubmit,
     reset,
-  } = useForm();
+  } = useForm<ICreatedCard>({ reValidateMode: 'onSubmit' });
 
-  const handleChange = (e: React.SyntheticEvent, fieldName: string) => {
-    setData((prevState) => ({
-      ...prevState,
-      [fieldName]: (e.target as HTMLInputElement).value,
-    }));
-  };
-
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    console.log(data);
+  const onSubmit = (data: ICreatedCard) => {
+    setProducts([...products, data]);
+    reset();
   };
 
   return (
@@ -29,23 +26,31 @@ const CreatedForm = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.form__content}>
           <div className={styles.form__container}>
-            <Input
+            <InputWithLabel
+              type="text"
               placeholder="Enter product name"
-              value={data.name || ''}
               className={styles.input__form}
-              onChange={(e) => handleChange(e, 'name')}
+              register={register('productName', {
+                required: 'Field is required',
+              })}
+              error={errors?.productName?.message?.toString()}
             />
-            <Input
-              placeholder="Enter product price (in euro)"
-              value={data.price || ''}
-              className={styles.input__form}
+            <InputWithLabel
               type="number"
-              onChange={(e) => handleChange(e, 'price')}
+              placeholder="Enter product price"
+              className={styles.input__form}
+              register={register('productPrice', {
+                required: 'Field is required',
+              })}
+              error={errors?.productPrice?.message?.toString()}
             />
+
             <Button className={styles.item__button}>Submit</Button>
           </div>
         </div>
       </form>
+
+      <CreatedProductList data={products} />
     </>
   );
 };

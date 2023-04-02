@@ -8,12 +8,14 @@ const InputWithLabel = ({
   className,
   register,
   placeholder,
+  error,
   ...rest
 }: InputWithLabelProps) => {
   return (
     <Label>
       {children}
-      <input type={type} className={className} {...register} placeholder={placeholder} {...rest} />
+      <input type={type} className={className} placeholder={placeholder} {...rest} {...register} />
+      {error && <p>{error}</p>}
     </Label>
   );
 };

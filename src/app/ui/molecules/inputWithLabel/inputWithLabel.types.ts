@@ -6,4 +6,5 @@ export default interface InputWithLabelProps extends InputHTMLAttributes<HTMLInp
   className: string;
   register?: UseFormRegisterReturn<string>;
   placeholder: string;
+  error?: string;
 }
