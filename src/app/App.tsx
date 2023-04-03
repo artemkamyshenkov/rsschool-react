@@ -1,10 +1,10 @@
 import React, { Component, ReactNode } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import MainPage from './components/pages/mainPage/mainPage';
-import AboutUs from './components/pages/aboutUs/aboutUs';
-import ErrorPage from './components/pages/errorPage/errorPage';
+import MainPage from './pages/mainPage/mainPage';
+import AboutUs from './pages/aboutUs/aboutUs';
+import ErrorPage from './pages/errorPage/errorPage';
 import MainLayout from './layouts/main';
-import CreatedFormPage from './components/pages/createdFormPage/createdFormPage';
+import CreatedFormPage from './pages/createdFormPage/createdFormPage';
 class App extends Component {
   render(): ReactNode {
     return (

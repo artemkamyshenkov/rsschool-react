@@ -1,8 +1,7 @@
 import CreatedForm from './createdForm';
 import React from 'react';
-import { render, screen, waitFor, fireEvent, getByPlaceholderText } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import userEvent from '@testing-library/user-event';
 
 describe('Cards component', () => {
   it('renders CreatedForm component', () => {

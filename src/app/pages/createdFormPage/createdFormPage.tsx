@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './createdForm.module.css';
-import CreatedForm from '../../../features/items/organisms/createdForm/createdForm';
+import CreatedForm from '../../features/items/organisms/createdForm/createdForm';
 const CreatedFormPage = () => {
   return (
     <>

@@ -1,6 +1,7 @@
-import { ICardItem } from '../../molecules/item-card/item-card.types';
 export default interface ICardsList {
-  data: ICardItem[];
+  data: string[];
   isLoading: boolean;
   className: string;
+  page?: number;
+  onPageChange: (page: number) => void;
 }
