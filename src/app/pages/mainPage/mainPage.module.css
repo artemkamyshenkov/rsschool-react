@@ -6,24 +6,3 @@
   gap: 1.5rem;
   justify-content: center;
 }
-
-.search__container {
-  display: flex;
-  justify-content: center;
-}
-
-.search__input {
-  padding: 5px 20px;
-  font-size: 18px;
-  width: 50%;
-  transition: all 0.5s;
-  border: 1px solid #ccc;
-}
-
-.search__input:hover {
-  border: 1px solid #ccc;
-  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
-}
-.search__input:focus {
-  outline: none;
-}

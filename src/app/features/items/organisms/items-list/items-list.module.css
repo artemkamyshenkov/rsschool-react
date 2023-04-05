@@ -109,8 +109,10 @@
 .loader__container {
   display: flex;
   justify-content: center;
+
   margin-top: 30px;
 }
+
 .wobblebar__loader:not(:required) {
   background: #a9d;
   -moz-border-radius: 10.66667px;

@@ -1,4 +1,5 @@
 export interface ISearchBar {
   value: string | number;
-  onSubmit: (query: string | number) => void;
+  onSubmit: (e: React.SyntheticEvent) => void;
+  onChange: (e: React.SyntheticEvent) => void;
 }

@@ -1,36 +1,32 @@
 import React, { useEffect, useState } from 'react';
 import { ItemsList } from '../../features/items';
-import Input from '../../ui/atoms/input';
 import SearchBar from '../../features/items/molecules/searchBar';
 import styles from './mainPage.module.css';
 import photoService from '../../services/photo.service';
-interface Photo {
-  urls: {
-    regular: string;
-  };
-}
+import { Photo } from '../../features/items/molecules/itemCardMain/itemCardMain.types';
 
 const MainPage: React.FC<object> = () => {
-  const [items, setItems] = useState([]);
   const [images, setImages] = useState([]);
   const [page, setPage] = useState(1);
-  const [searchText, setSearchText] = useState<string>(
-    localStorage.getItem('searchInputValue') || ''
-  );
+  const [inputValue, setInputValue] = useState<string>('');
+  const [searchText, setSearchText] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isSearching, setIsSearching] = useState<boolean>(false);
 
   useEffect(() => {
-    localStorage.setItem('searchInputValue', searchText);
-  }, [searchText]);
-
-  useEffect(() => {
-    loadPhotos(page);
-  }, [page]);
+    if (searchText !== '') {
+      searchPhotos(searchText, page);
+      setIsSearching(true);
+    } else {
+      loadPhotos(page);
+      setIsSearching(false);
+    }
+  }, [searchText, page]);
 
   const loadPhotos = async (page: number) => {
     try {
       const data = await photoService.fetch(page);
-      const photoData = data.map((photo: Photo) => photo.urls.regular);
+      const photoData = data.map((photo: Photo) => photo);
       setImages(photoData);
       setIsLoading(false);
     } catch (error) {
@@ -38,30 +34,47 @@ const MainPage: React.FC<object> = () => {
     }
   };
 
-  const handleSearchInput = (query: string | number) => {
-    // setSearchText((e.target as HTMLInputElement).value);
-    console.log(query);
+  const searchPhotos = async (query: string, page: number) => {
+    try {
+      const { results } = await photoService.search(query, page);
+      const photoData = results.map((photo: Photo) => photo);
+      setImages(photoData);
+      setIsLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleSubmitSearchInput = (e: React.SyntheticEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setSearchText(inputValue);
+    setInputValue('');
+  };
+
+  const handleChangeSearchInput = (e: React.SyntheticEvent) => {
+    setInputValue((e.target as HTMLInputElement).value);
   };
 
   const handlePageChange = (newPage: number) => {
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false);
-      setPage(newPage);
+      if (isSearching) {
+        setPage(newPage);
+      } else {
+        setPage(newPage);
+      }
     }, 1000);
   };
 
   return (
     <>
-      <div className={styles.search__container}>
-        {/* <Input
-          className={styles.search__input}
-          placeholder="Search"
-          onChange={handleChangeSearchInput}
-          value={searchText}
-        /> */}
-        <SearchBar value={searchText} onSubmit={handleSearchInput} />
-      </div>
+      <SearchBar
+        value={inputValue}
+        onSubmit={handleSubmitSearchInput}
+        onChange={handleChangeSearchInput}
+      />
 
       <ItemsList
         data={images}

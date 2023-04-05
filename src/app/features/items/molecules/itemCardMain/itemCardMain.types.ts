@@ -1,11 +1,19 @@
-export interface ICardMain {
+export interface Photo {
   id: string;
-  owner: string;
-  secret: string;
-  server: string;
-  title: string;
-  farm: number;
-  isfamily: number;
-  isfriend: number;
-  ispublic: number;
+  alt_description: string | null;
+  description: string | null;
+  likes: number;
+  created_at: string;
+  urls: {
+    regular: string;
+    small: string;
+  };
+  user: {
+    name: string;
+    username: string;
+  };
+}
+export interface ICardMain {
+  item: Photo;
+  onOpenModal: (id: string) => void;
 }

@@ -27,7 +27,7 @@ const photoService = {
         per_page: 15,
       },
     });
-    console.log(data);
+    return data.data;
   },
 };
 
