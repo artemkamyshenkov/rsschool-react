@@ -1,18 +1,76 @@
-import React from 'react';
+import React, { memo, useState } from 'react';
 import ICardsList from './items-list.types';
-import { ItemCard } from '../../molecules';
+import ItemCardMain from '../../molecules/itemCardMain/itemCardMain';
+import styles from './items-list.module.css';
+import { Photo } from '../../molecules/itemCardMain/itemCardMain.types';
+import ModalCard from '../../molecules/modalCard';
 
-const ItemsList = ({ data, isLoading, className }: ICardsList) => {
+const ItemsList = memo(({ data, isLoading, className, page, onPageChange }: ICardsList) => {
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const [openFoto, setOpenFoto] = useState<Photo>();
+  const handleOpenModal = (id: string) => {
+    const item = data.find((item) => item.id === id);
+    setOpenFoto(item);
+    setShowModal(true);
+  };
+
+  const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    if (e.target === e.currentTarget) {
+      handleCloseModal();
+    }
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
+  const handlePrev = () => {
+    if (page !== undefined) {
+      onPageChange(page - 1);
+    }
+  };
+
+  const handleNext = () => {
+    if (page !== undefined) {
+      onPageChange(page + 1);
+    }
+  };
+
   return (
     <>
-      {isLoading && <div>Loading...</div>}
-      <ul className={className} data-testid="cards">
-        {data.map((item) => (
-          <ItemCard item={item} key={item.id} />
-        ))}
-      </ul>
+      {isLoading && (
+        <div className={styles.loader__container}>
+          <div className={styles.wobblebar__loader}></div>
+        </div>
+      )}
+      {!isLoading && (
+        <>
+          {' '}
+          <ul className={className} data-testid="cards">
+            {data.map((item) => (
+              <ItemCardMain item={item} key={item.id} onOpenModal={handleOpenModal} />
+            ))}
+          </ul>
+          <div className={styles.btn__pagination_container}>
+            <button onClick={handlePrev} disabled={page === 1} className={styles.btn__pagination}>
+              Prev
+            </button>
+            <button onClick={handleNext} className={styles.btn__pagination}>
+              Next
+            </button>
+          </div>
+        </>
+      )}
+      {
+        <ModalCard
+          item={openFoto}
+          onCloseModal={handleCloseModal}
+          showModal={showModal}
+          onBackdropModal={handleBackdropClick}
+        />
+      }
     </>
   );
-};
+});
 
 export default ItemsList;
