@@ -4,6 +4,8 @@ import SearchBar from '../../features/items/molecules/searchBar';
 import styles from './mainPage.module.css';
 import photoService from '../../services/photo.service';
 import { Photo } from '../../features/items/molecules/itemCardMain/itemCardMain.types';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const MainPage: React.FC<object> = () => {
   const [images, setImages] = useState([]);
@@ -31,17 +33,21 @@ const MainPage: React.FC<object> = () => {
       setIsLoading(false);
     } catch (error) {
       console.log(error);
+      toast.error(`${error}`);
     }
   };
 
   const searchPhotos = async (query: string, page: number) => {
     try {
-      const { results } = await photoService.search(query, page);
-      const photoData = results.map((photo: Photo) => photo);
+      const data = await photoService.search(query, page);
+      const photoData = data.results.map((photo: Photo) => photo);
+      console.log(data);
       setImages(photoData);
       setIsLoading(false);
+      toast(`Found ${data.total} results for your query ${query}`, { theme: 'light' });
     } catch (error) {
       console.log(error);
+      toast.error(`${error}`);
     }
   };
 

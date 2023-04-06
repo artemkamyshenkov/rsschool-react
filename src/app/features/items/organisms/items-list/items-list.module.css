@@ -25,6 +25,10 @@
   cursor: auto;
 }
 
+.not-found__block {
+  text-align: center;
+  margin-top: 40px;
+}
 @keyframes wobblebar-loader {
   0% {
     left: 4px;
