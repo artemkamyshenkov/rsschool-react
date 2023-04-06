@@ -11,6 +11,7 @@ const ItemCardMain = ({ item, onOpenModal }: ICardMain) => {
         className={styles.item__img}
         onClick={() => onOpenModal(item.id)}
       />
+      <div className={styles.product__hover}></div>
     </li>
   );
 };
