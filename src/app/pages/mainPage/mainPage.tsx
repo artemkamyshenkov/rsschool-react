@@ -28,7 +28,7 @@ const MainPage: React.FC<object> = () => {
   const loadPhotos = async (page: number) => {
     try {
       const data = await photoService.fetch(page);
-      const photoData = data.map((photo: Photo) => photo);
+      const photoData = data ? data.map((photo: Photo) => photo) : [];
       setImages(photoData);
       setIsLoading(false);
     } catch (error) {
@@ -40,8 +40,7 @@ const MainPage: React.FC<object> = () => {
   const searchPhotos = async (query: string, page: number) => {
     try {
       const data = await photoService.search(query, page);
-      const photoData = data.results.map((photo: Photo) => photo);
-      console.log(data);
+      const photoData = data ? data.results.map((photo: Photo) => photo) : [];
       setImages(photoData);
       setIsLoading(false);
       toast(`Found ${data.total} results for your query ${query}`, { theme: 'light' });
@@ -75,7 +74,7 @@ const MainPage: React.FC<object> = () => {
   };
 
   return (
-    <>
+    <div data-testid="main-page">
       <SearchBar
         value={inputValue}
         onSubmit={handleSubmitSearchInput}
@@ -89,7 +88,7 @@ const MainPage: React.FC<object> = () => {
         page={page}
         onPageChange={handlePageChange}
       />
-    </>
+    </div>
   );
 };
 

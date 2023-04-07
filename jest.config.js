@@ -12,6 +12,7 @@ module.exports = {
   coveragePathIgnorePatterns: [
     '<rootDir>/src/main.tsx',
     '<rootDir>/src/vite-env.d.ts',
+    '<rootDir>/src/app/App.tsx',
     'interface',
     'index',
     'service',
