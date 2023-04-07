@@ -4,6 +4,8 @@ import SearchBar from '../../features/items/molecules/searchBar';
 import styles from './mainPage.module.css';
 import photoService from '../../services/photo.service';
 import { Photo } from '../../features/items/molecules/itemCardMain/itemCardMain.types';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const MainPage: React.FC<object> = () => {
   const [images, setImages] = useState([]);
@@ -26,22 +28,25 @@ const MainPage: React.FC<object> = () => {
   const loadPhotos = async (page: number) => {
     try {
       const data = await photoService.fetch(page);
-      const photoData = data.map((photo: Photo) => photo);
+      const photoData = data ? data.map((photo: Photo) => photo) : [];
       setImages(photoData);
       setIsLoading(false);
     } catch (error) {
       console.log(error);
+      toast.error(`${error}`);
     }
   };
 
   const searchPhotos = async (query: string, page: number) => {
     try {
-      const { results } = await photoService.search(query, page);
-      const photoData = results.map((photo: Photo) => photo);
+      const data = await photoService.search(query, page);
+      const photoData = data ? data.results.map((photo: Photo) => photo) : [];
       setImages(photoData);
       setIsLoading(false);
+      toast(`Found ${data.total} results for your query ${query}`, { theme: 'light' });
     } catch (error) {
       console.log(error);
+      toast.error(`${error}`);
     }
   };
 
@@ -69,7 +74,7 @@ const MainPage: React.FC<object> = () => {
   };
 
   return (
-    <>
+    <div data-testid="main-page">
       <SearchBar
         value={inputValue}
         onSubmit={handleSubmitSearchInput}
@@ -83,7 +88,7 @@ const MainPage: React.FC<object> = () => {
         page={page}
         onPageChange={handlePageChange}
       />
-    </>
+    </div>
   );
 };
 

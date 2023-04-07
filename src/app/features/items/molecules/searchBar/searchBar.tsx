@@ -5,7 +5,7 @@ import { ISearchBar } from './searchBar.types';
 import styles from './searchBar.module.css';
 const SearchBar = ({ value, onSubmit, onChange }: ISearchBar) => {
   return (
-    <form onSubmit={onSubmit} className={styles.search__form}>
+    <form onSubmit={onSubmit} className={styles.search__form} data-testid="search-bar">
       <Input
         placeholder="Search photo (auto, ocean, summer, ext.)"
         value={value}

@@ -5,6 +5,7 @@ import AboutUs from './pages/aboutUs/aboutUs';
 import ErrorPage from './pages/errorPage/errorPage';
 import MainLayout from './layouts/main';
 import CreatedFormPage from './pages/createdFormPage/createdFormPage';
+import { ToastContainer } from 'react-toastify';
 class App extends Component {
   render(): ReactNode {
     return (
@@ -18,6 +19,7 @@ class App extends Component {
             <Route path="*" element={<Navigate to="/404" replace={true} />} />
           </Route>
         </Routes>
+        <ToastContainer />
       </>
     );
   }

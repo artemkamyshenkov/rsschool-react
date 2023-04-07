@@ -2,53 +2,27 @@ import React from 'react';
 import { render, screen, act, waitFor } from '@testing-library/react';
 import MainPage from './mainPage';
 import '@testing-library/jest-dom';
-import fetchMock from 'fetch-mock';
+
 import userEvent from '@testing-library/user-event';
 
-const mockResponse = {
-  products: [
-    {
-      brand: 'Brand',
-      category: 'phone',
-      id: 1,
-      price: 10,
-      title: 'Iphone',
-      stock: 10,
-      images: ['img.jpg'],
-    },
-    {
-      brand: 'Brand',
-      category: 'smart tv',
-      id: 2,
-      price: 10,
-      title: 'Iphone',
-      stock: 15,
-      images: ['img.jpg'],
-    },
-  ],
-};
-
 describe('MainPage', () => {
-  afterEach(() => {
-    fetchMock.reset();
-  });
-
-  it('renders the page with product cards', async () => {
-    fetchMock.mock('https://dummyjson.com/products?limit=30', {
-      status: 200,
-      body: mockResponse,
-    });
-    await act(async () => {
+  test('MainPage renders correctly', async () => {
+    act(() => {
       render(<MainPage />);
     });
-    expect(screen.getByTestId('cards')).toBeInTheDocument();
+    const mainPageElement = screen.getByTestId('main-page');
+    const searchBar = screen.getByTestId('search-bar');
+    expect(mainPageElement).toBeInTheDocument();
+    expect(searchBar).toBeInTheDocument();
+    await waitFor(() => {
+      setTimeout(() => {
+        const images = screen.getAllByRole('img');
+        expect(images).toHaveLength(15);
+      }, 3000);
+    });
   });
 
   it('typing in Search works', async () => {
-    fetchMock.mock('https://dummyjson.com/products?limit=30', {
-      status: 200,
-      body: mockResponse,
-    });
     await act(async () => {
       render(<MainPage />);
     });

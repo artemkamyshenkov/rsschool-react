@@ -36,17 +36,24 @@ const ItemsList = memo(({ data, isLoading, className, page, onPageChange }: ICar
     }
   };
 
+  if (data.length === 0) {
+    return (
+      <h3 className={styles.not_found__block}>
+        Sorry, no results were found for your search, please be a little more specific.
+      </h3>
+    );
+  }
   return (
     <>
       {isLoading && (
-        <div className={styles.loader__container}>
+        <div className={styles.loader__container} data-testid="loader">
           <div className={styles.wobblebar__loader}></div>
         </div>
       )}
       {!isLoading && (
         <>
           {' '}
-          <ul className={className} data-testid="cards">
+          <ul className={className} data-testid="item-list">
             {data.map((item) => (
               <ItemCardMain item={item} key={item.id} onOpenModal={handleOpenModal} />
             ))}
