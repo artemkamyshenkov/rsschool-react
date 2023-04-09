@@ -8,7 +8,7 @@ describe('NavBar', () => {
   it('renders the navigation links and the current page', () => {
     render(
       <MemoryRouter initialEntries={['/about']}>
-        <Header />
+        <Header currentPage="about" />
       </MemoryRouter>
     );
 
