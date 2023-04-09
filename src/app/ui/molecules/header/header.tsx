@@ -1,11 +1,11 @@
 import React from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import styles from './header.module.css';
 
-const Header = () => {
-  const location = useLocation();
-  const currentPage = location.pathname === '/' ? 'main' : location.pathname.slice(1);
-
+interface HeaderProps {
+  currentPage: string;
+}
+const Header = ({ currentPage }: HeaderProps) => {
   const addActiveClassLink = (isActive: boolean) => {
     return isActive ? `${styles.nav__link} ${styles.active__link}` : styles.nav__link;
   };

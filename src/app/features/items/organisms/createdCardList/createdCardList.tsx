@@ -8,13 +8,11 @@ interface CreatedProductListProps {
 
 const CreatedProductList = ({ data }: CreatedProductListProps) => {
   return (
-    <>
-      <ul className={styles.products__list} data-testid="createdProductList">
-        {data.map((item) => (
-          <CreatedProductItem item={item} key={item.id} />
-        ))}
-      </ul>
-    </>
+    <ul className={styles.products__list} data-testid="createdProductList">
+      {data.map((item) => (
+        <CreatedProductItem item={item} key={item.id} />
+      ))}
+    </ul>
   );
 };
 
