@@ -6,6 +6,7 @@ import ErrorPage from './pages/errorPage/errorPage';
 import MainLayout from './layouts/main';
 import CreatedFormPage from './pages/createdFormPage/createdFormPage';
 import { ToastContainer } from 'react-toastify';
+
 const App = () => {
   const ROUTES = {
     mainPage: '/',
@@ -24,6 +25,7 @@ const App = () => {
           <Route path="*" element={<Navigate to="/404" replace={true} />} />
         </Route>
       </Routes>
+
       <ToastContainer />
     </>
   );

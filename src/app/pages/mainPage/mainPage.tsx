@@ -2,57 +2,36 @@ import React, { useEffect, useState } from 'react';
 import { ItemsList } from '../../features/items';
 import SearchBar from '../../features/items/molecules/searchBar';
 import styles from './mainPage.module.css';
-import photoService from '../../services/photo.service';
-import { Photo } from '../../features/items/molecules/itemCardMain/itemCardMain.types';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  loadPhotos,
+  searchPhotos,
+  setIsSearching,
+  setPage,
+  setSearchText,
+} from '../../../store/photos/photosSlice';
+import { AppDispatch, RootState } from '../../../store/store';
 const MainPage: React.FC<object> = () => {
-  const [images, setImages] = useState([]);
   const [page, setPage] = useState(1);
   const [inputValue, setInputValue] = useState<string>('');
   const [searchText, setSearchText] = useState<string>('');
-  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isSearching, setIsSearching] = useState<boolean>(false);
-
+  const dispatch = useDispatch<AppDispatch>();
+  const images = useSelector((state: RootState) => state.photo.images);
+  const isLoading = useSelector((state: RootState) => state.photo.isLoading);
+  console.log(images);
   useEffect(() => {
     if (searchText !== '') {
-      searchPhotos(searchText, page);
-      setIsSearching(true);
+      dispatch(searchPhotos({ query: searchText, page }));
     } else {
-      loadPhotos(page);
-      setIsSearching(false);
+      dispatch(loadPhotos(page));
     }
-  }, [searchText, page]);
-
-  const loadPhotos = async (page: number) => {
-    try {
-      const data = await photoService.fetch(page);
-      const photoData = data ? data.map((photo: Photo) => photo) : [];
-      setImages(photoData);
-      setIsLoading(false);
-    } catch (error) {
-      console.log(error);
-      toast.error(`${error}`);
-    }
-  };
-
-  const searchPhotos = async (query: string, page: number) => {
-    try {
-      const data = await photoService.search(query, page);
-      const photoData = data ? data.results.map((photo: Photo) => photo) : [];
-      setImages(photoData);
-      setIsLoading(false);
-      toast(`Found ${data.total} results for your query ${query}`, { theme: 'light' });
-    } catch (error) {
-      console.log(error);
-      toast.error(`${error}`);
-    }
-  };
+  }, [dispatch, searchText, page]);
 
   const handleSubmitSearchInput = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    setIsLoading(true);
     setSearchText(inputValue);
     setInputValue('');
   };
@@ -62,9 +41,7 @@ const MainPage: React.FC<object> = () => {
   };
 
   const handlePageChange = (newPage: number) => {
-    setIsLoading(true);
     setTimeout(() => {
-      setIsLoading(false);
       if (isSearching) {
         setPage(newPage);
       } else {
