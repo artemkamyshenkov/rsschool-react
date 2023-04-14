@@ -8,4 +8,5 @@ export default interface InputWithLabelProps extends InputHTMLAttributes<HTMLInp
   placeholder?: string;
   error?: string;
   accept?: string;
+  checked?: boolean;
 }
