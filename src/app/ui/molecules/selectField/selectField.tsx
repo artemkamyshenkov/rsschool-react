@@ -2,7 +2,15 @@ import React from 'react';
 import { ISelectField } from './selectField.types';
 import styles from './selectField.module.css';
 
-const SelectField = ({ options, error, className, register, ...rest }: ISelectField) => {
+const SelectField = ({
+  options,
+  error,
+  className,
+  register,
+  onChange,
+  defaultValue,
+  ...rest
+}: ISelectField) => {
   return (
     <div className={styles.input__container}>
       <select
@@ -10,7 +18,8 @@ const SelectField = ({ options, error, className, register, ...rest }: ISelectFi
         data-testid="productCategory-dropdown"
         {...register}
         {...rest}
-        defaultValue=""
+        defaultValue={defaultValue}
+        onChange={onChange}
       >
         <option disabled value="">
           {'Choose a category'}

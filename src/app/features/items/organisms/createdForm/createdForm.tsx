@@ -4,14 +4,29 @@ import { Button } from '../../../../ui/atoms/button';
 import { useForm } from 'react-hook-form';
 import InputWithLabel from '../../../../ui/molecules/inputWithLabel';
 import CreatedProductList from '../createdCardList';
-import { ICreatedCard } from '../../molecules/createdCard/createdCard.types';
 import { ICreatedForm } from './createdForm.types';
 import SelectField from '../../../../ui/molecules/selectField';
 import RadioField from '../../../../ui/molecules/radioField';
-const CreatedForm = () => {
-  const [products, setProducts] = useState<ICreatedCard[]>([]);
-  const [isSubmit, setIsSubmit] = useState(false);
+import {
+  addCard,
+  setName,
+  setPrice,
+  setCategory,
+  setDate,
+} from '../../../../../store/createdCard/createdCard.slice';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../../../../store/store';
 
+const CreatedForm = () => {
+  const [isSubmit, setIsSubmit] = useState(false);
+  const dispatch = useDispatch();
+  const {
+    data: products,
+    name,
+    price,
+    category,
+    date,
+  } = useSelector((state: RootState) => state.createdCard);
   const {
     register,
     formState: { errors },
@@ -25,15 +40,15 @@ const CreatedForm = () => {
     const images = file ? URL.createObjectURL(file) : '';
     const card = {
       id: Date.now(),
-      name: data.productName,
-      price: data.productPrice,
+      name: data.name,
+      price: data.price,
       images,
       isChecked: data.isChecked,
       category: data.select,
       date: data.date,
       publicDays: data.radio,
     };
-    setProducts([...products, card]);
+    dispatch(addCard(card));
     setIsSubmit(true);
     setTimeout(() => {
       setIsSubmit(false);
@@ -50,25 +65,37 @@ const CreatedForm = () => {
               type="text"
               placeholder="Enter product name"
               className={styles.input__form}
-              register={register('productName', {
+              register={register('name', {
                 required: 'Field is required',
               })}
-              error={errors?.productName?.message?.toString()}
+              error={errors?.name?.message?.toString()}
+              onInput={(e: React.ChangeEvent<HTMLInputElement>) => {
+                dispatch(setName(e.target.value));
+              }}
+              value={name}
             />
             <InputWithLabel
               type="number"
               placeholder="Enter product price"
               className={styles.input__form}
-              register={register('productPrice', {
+              register={register('price', {
                 required: 'Field is required',
               })}
-              error={errors?.productPrice?.message?.toString()}
+              error={errors?.price?.message?.toString()}
+              onInput={(e: React.ChangeEvent<HTMLInputElement>) => {
+                dispatch(setPrice(parseInt(e.target.value)));
+              }}
+              value={price}
             />
             <SelectField
               options={['Smartphone', 'Auto', 'TV', 'Jewelry', 'Other']}
               register={register('select', { required: 'Category is required' })}
               error={errors?.select?.message?.toString()}
               className={styles.input__select}
+              onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+                dispatch(setCategory(e.target.value));
+              }}
+              defaultValue={category || ''}
             />
             <InputWithLabel
               type="date"
@@ -77,6 +104,10 @@ const CreatedForm = () => {
                 required: 'Field is required',
               })}
               error={errors?.date?.message?.toString()}
+              onInput={(e: React.ChangeEvent<HTMLInputElement>) => {
+                dispatch(setDate(e.target.value));
+              }}
+              value={date}
             />
 
             <InputWithLabel
