@@ -2,21 +2,13 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { Photo } from '../../app/features/items/molecules/itemCardMain/itemCardMain.types';
 import { httpService } from '../../app/services/http.service';
+import { PhotoState, SearchPhotosResult, SearchPhotosParams } from './photosSlice.types';
 
 const photoService = {
   apiKey: '-xe8z1BYEBuBQTk-jMqe2U3eECgdj14Showo4hEm6xg',
   photoEndpoint: 'photos?',
   searchEndpoint: 'search/photos?',
 };
-interface SearchPhotosParams {
-  query: string;
-  page: number;
-}
-
-interface SearchPhotosResult {
-  searchedPhotos: Photo[];
-  totalResults: number;
-}
 
 export const loadPhotos = createAsyncThunk<Photo[], number, { rejectValue: string }>(
   'photos/loadPhotos',
@@ -33,7 +25,7 @@ export const loadPhotos = createAsyncThunk<Photo[], number, { rejectValue: strin
       });
       return data.data.map((photo: Photo) => photo);
     } catch (error) {
-      return rejectWithValue('Error occurred while fetching photos');
+      return rejectWithValue((error as Error).message);
     }
   }
 );
@@ -58,23 +50,25 @@ export const searchPhotos = createAsyncThunk<
     const totalResults = data.data.total;
     return { searchedPhotos, totalResults };
   } catch (error) {
-    return rejectWithValue('Error occurred while fetching photos');
+    return rejectWithValue((error as Error).message);
   }
 });
 
-export interface PhotoState {
-  images: Photo[];
-  isLoading: boolean;
-  searchText: string;
-  totalResults: number;
-}
+const setError = (state: PhotoState, action: PayloadAction<string | undefined>) => {
+  state.isLoading = false;
+  if (action.payload) {
+    state.error = action.payload;
+  }
+};
 
 const initialState: PhotoState = {
   images: [],
   isLoading: true,
   searchText: '',
   totalResults: 0,
+  error: undefined,
 };
+
 const photosSlice = createSlice({
   name: 'photos',
   initialState,
@@ -88,14 +82,14 @@ const photosSlice = createSlice({
       .addCase(loadPhotos.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(loadPhotos.rejected, (state) => {
-        state.isLoading = false;
+      .addCase(loadPhotos.rejected, (state, action) => {
+        setError(state, action);
       })
       .addCase(searchPhotos.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(searchPhotos.rejected, (state) => {
-        state.isLoading = false;
+      .addCase(searchPhotos.rejected, (state, action) => {
+        setError(state, action);
       })
       .addCase(loadPhotos.fulfilled, (state, action) => {
         state.isLoading = false;

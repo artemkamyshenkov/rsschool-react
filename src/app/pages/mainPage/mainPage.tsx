@@ -9,20 +9,19 @@ import { loadPhotos, searchPhotos, setSearchText } from '../../../store/photos/p
 import { AppDispatch, RootState } from '../../../store/store';
 
 const MainPage: React.FC<object> = () => {
-  const [page, setPage] = useState(1);
-  const [inputValue, setInputValue] = useState<string>('');
   const dispatch = useDispatch<AppDispatch>();
-
-  const images = useSelector((state: RootState) => state.photo.images);
-  const isLoading = useSelector((state: RootState) => state.photo.isLoading);
-  const searchText = useSelector((state: RootState) => state.photo.searchText);
-  const totalResult = useSelector((state: RootState) => state.photo.totalResults);
+  const { images, isLoading, searchText, totalResults } = useSelector(
+    (state: RootState) => state.photo
+  );
+  const [page, setPage] = useState(1);
+  const [inputValue, setInputValue] = useState<string>(searchText as string | '');
 
   useEffect(() => {
     if (searchText !== '') {
       dispatch(searchPhotos({ query: searchText, page }));
-      if (!isLoading && totalResult !== 0) {
-        toast(`We found ${totalResult} results for your ${searchText} query`, { theme: 'light' });
+      if (!isLoading && totalResults !== 0) {
+        console.log(totalResults);
+        toast(`We found ${totalResults} results for your ${searchText} query`, { theme: 'light' });
       }
     } else {
       dispatch(loadPhotos(page));
