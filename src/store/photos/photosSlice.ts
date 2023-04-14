@@ -13,6 +13,11 @@ interface SearchPhotosParams {
   page: number;
 }
 
+interface SearchPhotosResult {
+  searchedPhotos: Photo[];
+  totalResults: number;
+}
+
 export const loadPhotos = createAsyncThunk<Photo[], number, { rejectValue: string }>(
   'photos/loadPhotos',
   async (page: number, { rejectWithValue }) => {
@@ -33,41 +38,42 @@ export const loadPhotos = createAsyncThunk<Photo[], number, { rejectValue: strin
   }
 );
 
-export const searchPhotos = createAsyncThunk<Photo[], SearchPhotosParams, { rejectValue: string }>(
-  'photos/searchPhotos',
-  async ({ query, page }, { rejectWithValue }) => {
-    try {
-      const data = await httpService.get(photoService.searchEndpoint, {
-        headers: {
-          Authorization: `Client-ID ${photoService.apiKey}`,
-        },
-        params: {
-          page: page,
-          per_page: 15,
-          query: query,
-        },
-      });
-      return data.data.results.map((photo: Photo) => photo);
-    } catch (error) {
-      return rejectWithValue('Error occurred while fetching photos');
-    }
+export const searchPhotos = createAsyncThunk<
+  SearchPhotosResult,
+  SearchPhotosParams,
+  { rejectValue: string }
+>('photos/searchPhotos', async ({ query, page }, { rejectWithValue }) => {
+  try {
+    const data = await httpService.get(photoService.searchEndpoint, {
+      headers: {
+        Authorization: `Client-ID ${photoService.apiKey}`,
+      },
+      params: {
+        page: page,
+        per_page: 15,
+        query: query,
+      },
+    });
+    const searchedPhotos = data.data.results.map((photo: Photo) => photo);
+    const totalResults = data.data.total;
+    return { searchedPhotos, totalResults };
+  } catch (error) {
+    return rejectWithValue('Error occurred while fetching photos');
   }
-);
+});
 
 export interface PhotoState {
   images: Photo[];
   isLoading: boolean;
-  page: number;
   searchText: string;
-  isSearching: boolean;
+  totalResults: number;
 }
 
 const initialState: PhotoState = {
   images: [],
   isLoading: true,
-  page: 1,
   searchText: '',
-  isSearching: false,
+  totalResults: 0,
 };
 const photosSlice = createSlice({
   name: 'photos',
@@ -75,12 +81,6 @@ const photosSlice = createSlice({
   reducers: {
     setSearchText: (state, action: PayloadAction<string>) => {
       state.searchText = action.payload;
-    },
-    setPage: (state, action: PayloadAction<number>) => {
-      state.page = action.payload;
-    },
-    setIsSearching: (state, action: PayloadAction<boolean>) => {
-      state.isSearching = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -103,10 +103,11 @@ const photosSlice = createSlice({
       })
       .addCase(searchPhotos.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.images = action.payload;
+        state.images = action.payload.searchedPhotos;
+        state.totalResults = action.payload.totalResults;
       });
   },
 });
 
-export const { setSearchText, setPage, setIsSearching } = photosSlice.actions;
+export const { setSearchText } = photosSlice.actions;
 export default photosSlice.reducer;

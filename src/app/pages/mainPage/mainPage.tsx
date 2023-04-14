@@ -5,26 +5,25 @@ import styles from './mainPage.module.css';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  loadPhotos,
-  searchPhotos,
-  setIsSearching,
-  setPage,
-  setSearchText,
-} from '../../../store/photos/photosSlice';
+import { loadPhotos, searchPhotos, setSearchText } from '../../../store/photos/photosSlice';
 import { AppDispatch, RootState } from '../../../store/store';
+
 const MainPage: React.FC<object> = () => {
   const [page, setPage] = useState(1);
   const [inputValue, setInputValue] = useState<string>('');
-  const [searchText, setSearchText] = useState<string>('');
-  const [isSearching, setIsSearching] = useState<boolean>(false);
   const dispatch = useDispatch<AppDispatch>();
+
   const images = useSelector((state: RootState) => state.photo.images);
   const isLoading = useSelector((state: RootState) => state.photo.isLoading);
-  console.log(images);
+  const searchText = useSelector((state: RootState) => state.photo.searchText);
+  const totalResult = useSelector((state: RootState) => state.photo.totalResults);
+
   useEffect(() => {
     if (searchText !== '') {
       dispatch(searchPhotos({ query: searchText, page }));
+      if (!isLoading && totalResult !== 0) {
+        toast(`We found ${totalResult} results for your ${searchText} query`, { theme: 'light' });
+      }
     } else {
       dispatch(loadPhotos(page));
     }
@@ -32,7 +31,7 @@ const MainPage: React.FC<object> = () => {
 
   const handleSubmitSearchInput = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    setSearchText(inputValue);
+    dispatch(setSearchText(inputValue));
     setInputValue('');
   };
 
@@ -41,13 +40,7 @@ const MainPage: React.FC<object> = () => {
   };
 
   const handlePageChange = (newPage: number) => {
-    setTimeout(() => {
-      if (isSearching) {
-        setPage(newPage);
-      } else {
-        setPage(newPage);
-      }
-    }, 1000);
+    setPage(newPage);
   };
 
   return (
