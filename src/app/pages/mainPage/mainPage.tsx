@@ -19,14 +19,16 @@ const MainPage: React.FC<object> = () => {
   useEffect(() => {
     if (searchText !== '') {
       dispatch(searchPhotos({ query: searchText, page }));
-      if (!isLoading && totalResults !== 0) {
-        console.log(totalResults);
-        toast(`We found ${totalResults} results for your ${searchText} query`, { theme: 'light' });
-      }
     } else {
       dispatch(loadPhotos(page));
     }
   }, [dispatch, searchText, page]);
+
+  useEffect(() => {
+    if (!isLoading && totalResults !== 0) {
+      toast(`We found ${totalResults} results for your ${searchText} query`, { theme: 'light' });
+    }
+  }, [isLoading, totalResults, searchText]);
 
   const handleSubmitSearchInput = (e: React.SyntheticEvent) => {
     e.preventDefault();

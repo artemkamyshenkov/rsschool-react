@@ -10,12 +10,20 @@ const InputWithLabel = ({
   register,
   placeholder,
   error,
+  checked,
   ...rest
 }: InputWithLabelProps) => {
   return (
     <Label className={styles.label}>
       {children}
-      <input type={type} className={className} placeholder={placeholder} {...rest} {...register} />
+      <input
+        type={type}
+        className={className}
+        placeholder={placeholder}
+        checked={checked}
+        {...rest}
+        {...register}
+      />
       {error && <p className={styles.error}>{error}</p>}
     </Label>
   );

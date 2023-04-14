@@ -1,5 +1,4 @@
 import { UseFormRegisterReturn } from 'react-hook-form';
-
 interface RadioFieldOptions {
   name: string;
   value: string;

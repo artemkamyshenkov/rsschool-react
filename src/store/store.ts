@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import photosReducer from './photos/photosSlice';
 import createdCardReducer from './createdCard/createdCard.slice';
 import { PhotoState } from './photos/photosSlice.types';
-import { CreatedCardState } from './createdCard/createdCard.slice';
+import { CreatedCardState } from './createdCard/createdCardSlice.types';
 
 export const store = configureStore({
   reducer: {

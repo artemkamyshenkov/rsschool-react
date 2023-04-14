@@ -1,25 +1,15 @@
 import { ICreatedCard } from '../../app/features/items/molecules/createdCard/createdCard.types';
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-
-export interface CreatedCardState {
-  data: ICreatedCard[];
-  name: string;
-  date?: string;
-  images?: string;
-  category?: string;
-  price: number;
-  isChecked?: boolean;
-  publicDays?: string;
-}
+import { CreatedCardState } from './createdCardSlice.types';
 const initialState: CreatedCardState = {
   data: [],
   name: '',
   price: 0,
   category: '',
   date: '',
-  images: '',
   isChecked: false,
+  publicDays: '',
 };
 
 const createdCardSlice = createSlice({
@@ -41,8 +31,15 @@ const createdCardSlice = createSlice({
     setDate: (state, action: PayloadAction<string>) => {
       state.date = action.payload;
     },
+    setPublicDays: (state, action: PayloadAction<string>) => {
+      state.publicDays = action.payload;
+    },
+    setIsChecked: (state, action: PayloadAction<boolean>) => {
+      state.isChecked = !action.payload;
+    },
   },
 });
 
-export const { addCard, setName, setPrice, setCategory, setDate } = createdCardSlice.actions;
+export const { addCard, setName, setPrice, setCategory, setDate, setPublicDays, setIsChecked } =
+  createdCardSlice.actions;
 export default createdCardSlice.reducer;

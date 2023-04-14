@@ -13,6 +13,8 @@ import {
   setPrice,
   setCategory,
   setDate,
+  setIsChecked,
+  setPublicDays,
 } from '../../../../../store/createdCard/createdCard.slice';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../../../store/store';
@@ -26,6 +28,7 @@ const CreatedForm = () => {
     price,
     category,
     date,
+    isChecked,
   } = useSelector((state: RootState) => state.createdCard);
   const {
     register,
@@ -33,6 +36,14 @@ const CreatedForm = () => {
     handleSubmit,
     reset,
   } = useForm<ICreatedForm>({ reValidateMode: 'onSubmit' });
+
+  const resetForm = () => {
+    dispatch(setName(''));
+    dispatch(setPrice(0));
+    dispatch(setDate(''));
+    dispatch(setPublicDays(''));
+    dispatch(setIsChecked(true));
+  };
 
   const onSubmit = (data: ICreatedForm) => {
     const files = data.images;
@@ -53,6 +64,7 @@ const CreatedForm = () => {
     setTimeout(() => {
       setIsSubmit(false);
     }, 2000);
+    resetForm();
     reset();
   };
 
@@ -137,6 +149,10 @@ const CreatedForm = () => {
               })}
               error={errors?.isChecked?.message?.toString()}
               className={styles.input__agree}
+              onInput={(e: React.ChangeEvent<HTMLInputElement>) => {
+                dispatch(setIsChecked(e.target.checked));
+              }}
+              checked={isChecked}
             >
               {' '}
               I agree with the posting rules
