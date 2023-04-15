@@ -7,5 +7,5 @@ export interface ISelectField {
   register?: UseFormRegisterReturn<string>;
   className?: string;
   onChange?: (event: React.ChangeEvent<HTMLSelectElement>) => void;
-  defaultValue: string;
+  defaultValue?: string;
 }

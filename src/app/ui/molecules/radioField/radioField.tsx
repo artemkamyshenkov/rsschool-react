@@ -3,7 +3,7 @@ import { IRadioField } from './radioField.types';
 import Label from '../../atoms/label';
 import styles from './radioField.module.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { setPublicDays } from '../../../../store/createdCard/createdCard.slice';
+import { setPublicDays } from '../../../../store/createdCard/createdCardSlice';
 import { RootState } from '../../../../store/store';
 const RadioField = ({ options, error, register, className }: IRadioField) => {
   const dispatch = useDispatch();
