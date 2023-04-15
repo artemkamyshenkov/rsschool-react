@@ -68,14 +68,12 @@ const ItemsList = memo(({ data, isLoading, className, page, onPageChange }: ICar
           </div>
         </>
       )}
-      {
-        <ModalCard
-          item={openFoto}
-          onCloseModal={handleCloseModal}
-          showModal={showModal}
-          onBackdropModal={handleBackdropClick}
-        />
-      }
+      <ModalCard
+        item={openFoto}
+        onCloseModal={handleCloseModal}
+        showModal={showModal}
+        onBackdropModal={handleBackdropClick}
+      />
     </>
   );
 });

@@ -6,14 +6,9 @@ import ErrorPage from './pages/errorPage/errorPage';
 import MainLayout from './layouts/main';
 import CreatedFormPage from './pages/createdFormPage/createdFormPage';
 import { ToastContainer } from 'react-toastify';
+import ROUTES from './routes/routes';
 
 const App = () => {
-  const ROUTES = {
-    mainPage: '/',
-    aboutPage: '/about',
-    formPage: '/form',
-    errorPage: '/404',
-  };
   return (
     <>
       <Routes>
