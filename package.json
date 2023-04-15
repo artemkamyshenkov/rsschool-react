@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "test": "jest --coverage --collectCoverageFrom=src/**/*.{ts,tsx} --detectOpenHandles",
+    "test": "jest --coverage --collectCoverageFrom=src/**/*.{ts,tsx} --detect-open-handles",
     "lint": "eslint ."
   },
   "repository": {
