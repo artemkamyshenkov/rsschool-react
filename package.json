@@ -6,6 +6,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "ts-node --esm server.ts",
+    "build": "npm run build:client && npm run build:server",
     "build:client": "vite build --ssrManifest --outDir dist/client",
     "build:server": "vite build --ssr src/entry-server.tsx --outDir dist/server",
     "preview": "vite preview",
