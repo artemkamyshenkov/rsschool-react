@@ -15,7 +15,7 @@ import {
   setDate,
   setIsChecked,
   setPublicDays,
-} from '../../../../../store/createdCard/createdCard.slice';
+} from '../../../../../store/createdCard/createdCardSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../../../store/store';
 

@@ -1,14 +1,14 @@
 import React from 'react';
 import { ICardModal } from './modalCard.types';
 import styles from './modalCard.module.css';
+import { format } from 'date-fns';
+
 const ModalCard = ({ item, onCloseModal, showModal, onBackdropModal }: ICardModal) => {
   const getDate = (date: string) => {
-    const dateStr = new Date(date);
-    const year = dateStr.getFullYear();
-    const month = ('0' + (dateStr.getMonth() + 1)).slice(-2);
-    const day = ('0' + dateStr.getDate()).slice(-2);
-    const dateWithoutTime = `${year}-${month}-${day}`;
-    return dateWithoutTime;
+    if (date) {
+      const formattedDate = format(new Date(date), 'yyyy-MM-dd');
+      return formattedDate;
+    }
   };
   return (
     <div className={`${styles.modal} ${showModal ? styles.open : ''}`}>

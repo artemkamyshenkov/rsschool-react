@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import photosReducer from './photos/photosSlice';
-import createdCardReducer from './createdCard/createdCard.slice';
+import createdCardReducer from './createdCard/createdCardSlice';
 import { PhotoState } from './photos/photosSlice.types';
 import { CreatedCardState } from './createdCard/createdCardSlice.types';
 

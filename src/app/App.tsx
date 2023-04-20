@@ -1,19 +1,14 @@
 import React from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Link, NavLink, Navigate } from 'react-router-dom';
 import MainPage from './pages/mainPage/mainPage';
 import AboutUs from './pages/aboutUs/aboutUs';
 import ErrorPage from './pages/errorPage/errorPage';
 import MainLayout from './layouts/main';
 import CreatedFormPage from './pages/createdFormPage/createdFormPage';
 import { ToastContainer } from 'react-toastify';
+import ROUTES from './routes/routes';
 
 const App = () => {
-  const ROUTES = {
-    mainPage: '/',
-    aboutPage: '/about',
-    formPage: '/form',
-    errorPage: '/404',
-  };
   return (
     <>
       <Routes>
