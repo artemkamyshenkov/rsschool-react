@@ -53,7 +53,7 @@ const ItemsList = memo(({ data, isLoading, className, page, onPageChange }: ICar
       {!isLoading && (
         <>
           {' '}
-          <ul className={className} data-testid="item-list">
+          <ul className={className} data-testid="items-list">
             {data.map((item) => (
               <ItemCardMain item={item} key={item.id} onOpenModal={handleOpenModal} />
             ))}
