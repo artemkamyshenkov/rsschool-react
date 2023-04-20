@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Link, NavLink, Navigate } from 'react-router-dom';
 import MainPage from './pages/mainPage/mainPage';
 import AboutUs from './pages/aboutUs/aboutUs';
 import ErrorPage from './pages/errorPage/errorPage';
