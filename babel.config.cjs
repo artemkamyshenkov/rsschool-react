@@ -6,8 +6,12 @@ module.exports = {
       '@babel/preset-typescript',
       {
         runtime: 'automatic',
+        targets: {
+          node: 'current',
+        },
+        modules: 'commonjs',
       },
     ],
   ],
-  plugins: [],
+  plugins: ['@babel/plugin-transform-modules-commonjs'],
 };
