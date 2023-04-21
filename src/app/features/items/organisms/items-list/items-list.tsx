@@ -36,7 +36,7 @@ const ItemsList = memo(({ data, isLoading, className, page, onPageChange }: ICar
     }
   };
 
-  if (data.length === 0) {
+  if (data.length === 0 && !isLoading) {
     return (
       <h3 className={styles.not_found__block}>
         Sorry, no results were found for your search, please be a little more specific.

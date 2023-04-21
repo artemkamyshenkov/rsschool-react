@@ -5,6 +5,7 @@ module.exports = {
     '^.+\\.ts$': 'babel-jest',
     '.+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$': 'jest-transform-stub',
   },
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
   moduleNameMapper: {
     '\\.(css|less)$': '<rootDir>/src/__mocks__/styleMock.ts',
   },
