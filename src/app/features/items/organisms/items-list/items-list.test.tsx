@@ -39,9 +39,7 @@ const mockResponse = [
 describe('Cards component', () => {
   it('displays Loading... when isLoading is true', () => {
     render(<ItemsList data={[]} isLoading={true} className="" onPageChange={() => {}} />);
-    const loading = screen.getByText(
-      'Sorry, no results were found for your search, please be a little more specific.'
-    );
+    const loading = screen.getByTestId('loader');
     expect(loading).toBeInTheDocument();
   });
 
