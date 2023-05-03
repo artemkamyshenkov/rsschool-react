@@ -1,0 +1,73 @@
+.form__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.input__form {
+  width: 95%;
+  padding: 5px 10px;
+  border-radius: 10px;
+  border: none;
+}
+
+.input__select {
+  width: 99%;
+  padding: 5px 10px;
+  border-radius: 10px;
+  border: none;
+}
+
+.input__agree {
+  margin-left: 10px;
+}
+
+.input__date {
+  width: 30%;
+  padding: 5px 10px;
+  border-radius: 10px;
+  border: none;
+}
+
+.form__content {
+  display: flex;
+  justify-content: center;
+}
+
+.form__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  background-color: #dcdcdc;
+  border-radius: 10px;
+  padding: 20px;
+  width: 50%;
+}
+
+.form__title {
+  text-align: center;
+  margin-bottom: 15px;
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.item__button {
+  background: #0156ff;
+  border-radius: 50px;
+  color: #fff;
+  padding: 0.5rem 2rem;
+  transition: 0.3s;
+  width: 100%;
+  user-select: none;
+  border: none;
+}
+
+.input__file {
+  max-width: 100%;
+  margin-left: 10px;
+}
+
+.input__radio {
+  margin-right: 10px;
+}
